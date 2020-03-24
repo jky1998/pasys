@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.ntu.dao.StaffDao">
+    <resultMap id="staff" type="edu.ntu.bean.Staff">
+        <id property="id" column="s_id"/>
+        <result property="no" column="s_no"/>
+        <result property="name" column="s_name"/>
+        <result property="gender" column="s_gender"/>
+        <result property="password" column="s_password"/>
+        <result property="workdate" column="s_workdate"/>
+        <result property="position" column="s_position"/>
+        <result property="mail" column="s_mail"/>
+        <result property="phone" column="s_phone"/>
+        <result property="idcard" column="s_idcard"/>
+        <result property="address" column="s_address"/>
+    </resultMap>
+
+    <select id="findByName" resultMap="staff">
+        select s_password from staff
+        where s_name=#{name}
+    </select>
+</mapper>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>pasys</title>
+    <link href="../../assets/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../css/common/head.css" rel="stylesheet">
+</head>
+<body>
+<div class="header">
+    <div class="user">
+        <span>当前操作员：</span>
+    </div>
+    <div class="date">
+        <span id="date"></span>
+    </div>
+    <div class="title">
+        <div class="title_big">
+            <h1>南通市公路管理处</h1>
+        </div>
+        <div class="title_small">
+            <h3>绩效考核管理系统</h3>
+        </div>
+    </div>
+    <div class="day">
+        <span id="day"></span>
+    </div>
+    <div class="btns">
+        <a href="#"><button class="butt" type="button">计划查询</button></a>
+        <a href="#"><button class="butt" type="button">修改密码</button></a>
+        <a href="#"><button class="butt" type="button">注销系统</button></a>
+        <a href="#"><button class="butt" type="button">退出系统</button></a>
+    </div>
+</div>
+</body>
+<script src="../../assets/jquery/jquery-2.2.4.min.js"
+    th:src="@{../../assets/jquery/jquery-2.2.4.min.js}"></script>
+<script type="text/javascript" src="../../js/common/head.js"
+    th:src="@{../../js/common/head.js}"></script>
+<script src="../../assets/bootstrap-3.3.7-dist/js/bootstrap.min.js"
+    th:src="@{../../assets/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+</html>

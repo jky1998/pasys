@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>pasys</title>
+    <link href="../../assets/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../assets/bootstrap-3.3.7-dist/css/bootstrap-datepicker.css" rel="stylesheet"/>
+    <link href="../../css/staff/input.css" rel="stylesheet">
+</head>
+<body>
+<div id="head" style="height: 100px;">
+    <iframe th:src="@{../common/head.html}" width="100%" ;
+            height="100%" frameborder="0" scrolling="no" name="headFrame"
+            ></iframe>
+</div>
+<div id="nav" style="height: 550px; float: left">
+    <iframe th:src="@{../common/nav.html}" width="200px"
+            height="550px" frameborder="0" scrolling="no" name="headFrame"
+            ></iframe>
+</div>
+<div class="staff">
+    <div class="title">
+        <span>人员录入</span>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <form class="form-horizontal" action="#" style="margin-top: 10px; color: #5e5e5e">
+                <div class="form-group">
+                    <label for="no" class="col-sm-2 control-label">工号</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="no" name="no" placeholder="请输入员工工号">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="col-sm-2 control-label">姓名</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="请输入员工姓名">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">性别</label>
+                    <div class="col-sm-10">
+                        <label class="radio-inline" for="male">
+                            <input type="radio" name="gender" id="male" value="0" checked> 男
+                        </label>
+                        <label class="radio-inline" for="female">
+                            <input type="radio" name="gender" id="female" value="1"> 女
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="workdate" class="col-sm-2 control-label">入职日期</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="workdate" name="workdate" placeholder="请选择入职日期">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="department" class="col-sm-2 control-label">部门</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="department" name="sname" placeholder="请选择部门">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="position" class="col-sm-2 control-label">职位</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="position" name="position" placeholder="请选择职位">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="col-sm-2 control-label">联系电话</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="请输入联系电话">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="idcard" class="col-sm-2 control-label">身份证号</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="idcard" name="idcard" placeholder="请输入身份证号">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="address" class="col-sm-2 control-label">地址</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="address" name="address" placeholder="请输入地址">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-2 control-label">密码</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="password" name="password" placeholder="请输入系统登录密码">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-4">
+                        <input type="submit" value="提交" class="btn"
+                               style="background-color: #5e5e5e; color: white; float: left; width: 80px;">
+                        <input type="submit" value="清空" class="btn"
+                               style="background-color: #5e5e5e; color: white; width: 80px; margin-left: 250px;">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../assets/jquery/jquery-2.2.4.min.js"
+        th:src="@{../../assets/jquery/jquery-2.2.4.min.js}"></script>
+<script type="text/javascript" src="../../js/staff/input.js"></script>
+<script type="text/javascript" src="../../assets/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../assets/bootstrap-3.3.7-dist/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="../../assets/bootstrap-3.3.7-dist/js/bootstrap-datepicker.zh-CN.js"></script>
+</html>
