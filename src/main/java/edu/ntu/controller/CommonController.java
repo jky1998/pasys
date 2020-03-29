@@ -28,14 +28,13 @@ public class CommonController {
         return "/common/login";
     }
 
-    @RequestMapping(value = "/check", method = RequestMethod.POST,
-            consumes="application/x-www-form-urlencoded")
-    public String checkPassword(LoginForm form, Model model) {
+    @RequestMapping(value = "/check", method = RequestMethod.POST)
+    public String checkPassword(@ModelAttribute LoginForm form, Model model) {
         boolean flag = commonBusiness.checkPassword(form);
         if (flag) {
             return "/staff/input";
         } else {
-            model.addAttribute("msg", "密码错误！");
+            model.addAttribute("msg", "用户名或密码错误！");
             return "/common/login";
         }
     }

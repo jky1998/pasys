@@ -18,7 +18,9 @@ public class CommonBusiness {
     public boolean checkPassword(LoginForm form) {
         boolean flag;
         Staff loginStaff = staffService.findByName(form.getName());
-        if (form.getPassword().equals(loginStaff.getPassword())) {
+        if (loginStaff == null) {
+            flag = false;
+        } else if (form.getPassword().equals(loginStaff.getPassword())) {
             flag = true;
         } else {
             flag = false;

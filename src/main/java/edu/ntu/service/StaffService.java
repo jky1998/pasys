@@ -13,4 +13,8 @@ public class StaffService {
     public Staff findByName(String name) {
         return staffDao.findByName(name);
     }
+
+    public void add(Staff staff) {
+        staffDao.add(staff);
+    }
 }

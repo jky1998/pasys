@@ -56,6 +56,11 @@ h3 {
     border-bottom: 1px solid white;
 }
 
+.msg {
+    font-size: 16px;
+    padding-left: 15px;
+}
+
 .login_table {
     padding-top: 45px;
 }

@@ -21,4 +21,33 @@
         select s_password from staff
         where s_name=#{name}
     </select>
+
+    <insert id="add">
+        insert into staff(
+          s_no,
+          s_name,
+          s_gender,
+          s_password,
+          s_workdate,
+          s_position,
+          s_mail,
+          s_phone,
+          s_idcard,
+          s_address,
+          s_department_id
+        )
+        values (
+          #{no},
+          #{name},
+          #{gender},
+          #{password},
+          #{workdate},
+          #{position},
+          #{mail},
+          #{phone},
+          #{idcard},
+          #{address},
+          #{department.id}
+        )
+    </insert>
 </mapper>
