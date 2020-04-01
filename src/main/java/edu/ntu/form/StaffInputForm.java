@@ -1,9 +1,8 @@
-package edu.ntu.bean;
+package edu.ntu.form;
 
 import java.util.Date;
 
-public class Staff {
-    private Integer id;
+public class StaffInputForm {
     private String no;
     private String name;
     private Integer gender;
@@ -14,15 +13,7 @@ public class Staff {
     private String phone;
     private String idcard;
     private String address;
-    private Department department;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    private int departmentId;
 
     public String getNo() {
         return no;
@@ -104,11 +95,11 @@ public class Staff {
         this.address = address;
     }
 
-    public Department getDepartment() {
-        return department;
+    public int getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
     }
 }

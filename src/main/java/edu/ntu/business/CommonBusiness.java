@@ -6,6 +6,8 @@ import edu.ntu.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpSession;
+
 @Component
 public class CommonBusiness {
     @Autowired
@@ -26,5 +28,10 @@ public class CommonBusiness {
             flag = false;
         }
         return flag;
+    }
+
+    public Staff getLoginStaff(LoginForm form) {
+        Staff staff = staffService.findByName(form.getName());
+        return staff;
     }
 }
