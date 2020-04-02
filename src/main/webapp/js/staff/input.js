@@ -71,6 +71,7 @@ $(document).ready(function(){
             if (!flag) {
                 break;
             }
+            break;
         }
 
         // 数据传输
@@ -78,7 +79,7 @@ $(document).ready(function(){
             $.ajax({
                 url: "/staff/add",
                 type: 'POST',
-                data: {
+                data: JSON.stringify({
                     "no": no,
                     "name": name,
                     "gender": gender,
@@ -90,18 +91,30 @@ $(document).ready(function(){
                     "idcard": idcard,
                     "address": address,
                     "departmentId": departmentId
-                },
+                }),
+                contentType: "application/json;charset=UTF-8",
                 dataType: "json",
-                success: function (msg) {
-                    console.log(msg);
+                success: function (data) {
+                    //console.log(msg.flag);
+                    if (data.flag === false) {
+                        alert(data.msg);
+                    } else if (data.flag === true) {
+                        alert(data.msg);
+                        reset();
+                    }
                 }
             })
         }
 
     });
 
-    // 清空
+    // 点击重置按钮
     $("#reset").click(function () {
+        reset();
+    });
+
+    // 清空方法
+    function reset() {
         document.getElementById("no").value = "";
         document.getElementById("name").value = "";
         $("#female").removeAttr("checked");
@@ -114,7 +127,7 @@ $(document).ready(function(){
         document.getElementById("idcard").value = "";
         document.getElementById("address").value = "";
         document.getElementById("password").value = "";
-    });
+    }
 
     // 表单验证
     function checkNo(no) {

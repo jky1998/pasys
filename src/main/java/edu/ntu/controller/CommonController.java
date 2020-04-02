@@ -17,12 +17,12 @@ public class CommonController {
     @Autowired
     CommonBusiness commonBusiness;
 
-    @RequestMapping("/head")
-    public String showHead(HttpSession session, Model model) {
-        Staff staff = (Staff)session.getAttribute("staff");
-        model.addAttribute("staff", staff);
-        return "/common/head";
-    }
+//    @RequestMapping("/head")
+//    public String showHead(HttpSession session, Model model) {
+//        Staff staff = (Staff)session.getAttribute("staff");
+//        model.addAttribute("staff", staff);
+//        return "/commom/head";
+//    }
 
     @RequestMapping("/nav")
     public String showNav() {

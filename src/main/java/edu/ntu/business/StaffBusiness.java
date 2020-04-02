@@ -1,5 +1,6 @@
 package edu.ntu.business;
 
+import edu.ntu.bean.Department;
 import edu.ntu.bean.Message;
 import edu.ntu.bean.Staff;
 import edu.ntu.form.StaffInputForm;
@@ -7,10 +8,17 @@ import edu.ntu.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class StaffBusiness {
     @Autowired
     private StaffService staffService;
+
+    // 查看员工信息
+    public List<Staff> findAll() {
+        return staffService.findAll();
+    }
 
     // 员工信息录入
     public Message add(StaffInputForm form) {
@@ -32,7 +40,9 @@ public class StaffBusiness {
             staff.setPhone(form.getPhone());
             staff.setIdcard(form.getIdcard());
             staff.setAddress(form.getAddress());
-            staff.getDepartment().setId(form.getDepartmentId());
+            Department department = new Department();
+            department.setId(form.getDepartmentId());
+            staff.setDepartment(department);
             staffService.add(staff);
             m.setFlag(true);
             m.setMsg("添加成功！");

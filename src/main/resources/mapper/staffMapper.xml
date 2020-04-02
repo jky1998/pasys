@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.ntu.dao.StaffDao">
-    <resultMap id="staff" type="edu.ntu.bean.Staff">
+    <resultMap id="staffResultMap" type="edu.ntu.bean.Staff">
         <id property="id" column="s_id"/>
         <result property="no" column="s_no"/>
         <result property="name" column="s_name"/>
@@ -15,9 +15,35 @@
         <result property="phone" column="s_phone"/>
         <result property="idcard" column="s_idcard"/>
         <result property="address" column="s_address"/>
+        <association property="department"
+                     resultMap="departmentResultMap"/>
+    </resultMap>
+    <resultMap id="departmentResultMap" type="edu.ntu.bean.Department">
+        <id property="id" column="d_id"/>
+        <result property="no" column="d_no"/>
+        <result property="name" column="d_name"/>
     </resultMap>
 
-    <select id="findByName" resultMap="staff">
+    <select id="findAll" resultMap="staffResultMap">
+        select s.s_id,
+          s.s_no,
+          s.s_name,
+          s.s_gender,
+          s.s_password,
+          s.s_workdate,
+          s.s_position,
+          s.s_mail,
+          s.s_phone,
+          s.s_idcard,
+          s.s_address,
+          d.d_id,
+          d.d_no,
+          d.d_name
+        from staff as s
+        left join department as d on s.s_department_id = d.d_id
+    </select>
+
+    <select id="findByName" resultMap="staffResultMap">
         select s_id,
           s_no,
           s_name,
@@ -33,7 +59,7 @@
         where s_name=#{name}
     </select>
 
-    <select id="findByNo" resultMap="staff">
+    <select id="findByNo" resultMap="staffResultMap">
         select s_id,
           s_no,
           s_name

@@ -1,0 +1,16 @@
+/* 页面初始化 */
+* {margin: 0; padding: 0;}
+a {text-decoration: none;}
+ul {list-style: none;}
+
+.manage {
+    flex: auto;
+    padding: 10px;
+}
+
+.staff_tbl {
+    color: #5e5e5e;
+    margin-top: 20px;
+}
+
+
