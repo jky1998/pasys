@@ -1,14 +1,12 @@
-package edu.ntu.controller;
+package ntu.jky.controller;
 
-import edu.ntu.bean.Staff;
-import edu.ntu.business.CommonBusiness;
-import edu.ntu.form.LoginForm;
+import ntu.jky.bean.Staff;
+import ntu.jky.business.CommonBusiness;
+import ntu.jky.form.LoginForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/common")
@@ -17,28 +15,19 @@ public class CommonController {
     @Autowired
     CommonBusiness commonBusiness;
 
-//    @RequestMapping("/head")
-//    public String showHead(HttpSession session, Model model) {
-//        Staff staff = (Staff)session.getAttribute("staff");
-//        model.addAttribute("staff", staff);
-//        return "/commom/head";
-//    }
-
-    @RequestMapping("/nav")
-    public String showNav() {
-        return "/common/nav";
-    }
-
+    // login.html
     @RequestMapping("/login")
     public String login() {
         return "/common/login";
     }
 
+    // 登陆验证
     @RequestMapping(value = "/check", method = RequestMethod.POST)
     public String checkPassword(@ModelAttribute LoginForm form, Model model) {
         boolean flag = commonBusiness.checkPassword(form);
         if (flag) {
             Staff staff = commonBusiness.getLoginStaff(form);
+            // 将staff存储在session中
             model.addAttribute("staff", staff);
             return "/staff/input";
         } else {

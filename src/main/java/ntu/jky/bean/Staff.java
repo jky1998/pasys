@@ -1,7 +1,10 @@
-package edu.ntu.bean;
+package ntu.jky.bean;
 
 import java.util.Date;
 
+/**
+ * 用户类
+ */
 public class Staff {
     private Integer id;
     private String no;
@@ -9,12 +12,21 @@ public class Staff {
     private Integer gender;
     private String password;
     private Date workdate;
-    private String position;
+    private Integer position;
     private String mail;
     private String phone;
     private String idcard;
     private String address;
     private Department department;
+    private String formatdate;
+
+    public String getFormatdate() {
+        return formatdate;
+    }
+
+    public void setFormatdate(String formatdate) {
+        this.formatdate = formatdate;
+    }
 
     public Integer getId() {
         return id;
@@ -64,11 +76,11 @@ public class Staff {
         this.workdate = workdate;
     }
 
-    public String getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(Integer position) {
         this.position = position;
     }
 

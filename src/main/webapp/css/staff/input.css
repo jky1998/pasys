@@ -3,12 +3,12 @@
 a {text-decoration: none;}
 ul {list-style: none;}
 
-.content {
-    display: flex;
-    width: 100vw;
-    height: calc(100% - 107px);
-    min-height: calc(100vh - 107px);
-}
+/*.content {*/
+    /*display: flex;*/
+    /*width: 100vw;*/
+    /*height: calc(100% - 107px);*/
+    /*min-height: calc(100vh - 107px);*/
+/*}*/
 
 .staff {
     flex: auto;

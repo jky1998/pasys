@@ -5,14 +5,6 @@ ul {list-style: none;}
 h1 {margin: 0;}
 h3 {margin: 0;}
 
-/*通用*/
-.content {
-    display: flex;
-    width: 100vw;
-    height: calc(100% - 107px);
-    min-height: calc(100vh - 107px);
-}
-
 /*标题*/
 .header {
     width: 100%;
@@ -30,10 +22,6 @@ h3 {margin: 0;}
     margin-left: 20px;
 }
 
-.day {
-    margin-left: 10px;
-}
-
 .title {
     color: white;
     margin-left: 15px;
@@ -49,10 +37,10 @@ h3 {margin: 0;}
 }
 
 .day {
-    color: white;
     font-family: 黑体;
     font-size: small;
     margin-top: 10px;
+    margin-left: 10px;
 }
 
 .btns {
@@ -122,7 +110,24 @@ h3 {margin: 0;}
     background: #5e5e5e;
 }
 
+.hide_title a:focus {
+    text-decoration: none;
+    color: white;
+}
+
+.hide_title>a>li:focus {
+    background: #5e5e5e;
+}
+
 /*页面*/
+.content {
+    display: flex;
+    width: 100vw;
+    height: calc(100% - 107px);
+    min-height: calc(100vh - 107px);
+    color: #5e5e5e;
+}
+
 .form_title {
     color: #5e5e5e;
     font-size: medium;
@@ -134,4 +139,5 @@ h3 {margin: 0;}
     line-height: 30px;
     padding-left: 30px;
     border-radius: 5px;
+    width: 100%;
 }

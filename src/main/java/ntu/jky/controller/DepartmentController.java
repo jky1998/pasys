@@ -1,10 +1,9 @@
-package edu.ntu.controller;
+package ntu.jky.controller;
 
-import edu.ntu.bean.Department;
-import edu.ntu.business.DepartmentBusiness;
+import ntu.jky.bean.Department;
+import ntu.jky.business.DepartmentBusiness;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -16,6 +15,7 @@ public class DepartmentController {
     @Autowired
     private DepartmentBusiness departmentBusiness;
 
+    // show departments
     @RequestMapping("/show")
     @ResponseBody
     public List<Department> showDepartments() {

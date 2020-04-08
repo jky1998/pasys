@@ -1,6 +1,6 @@
-package edu.ntu.dao;
+package ntu.jky.dao;
 
-import edu.ntu.bean.Department;
+import ntu.jky.bean.Department;
 
 import java.util.List;
 

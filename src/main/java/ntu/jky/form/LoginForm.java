@@ -1,4 +1,4 @@
-package edu.ntu.form;
+package ntu.jky.form;
 
 /**
  * @author jiangkeyi
@@ -6,15 +6,15 @@ package edu.ntu.form;
  */
 
 public class LoginForm {
-    private String name;
+    private String no;
     private String password;
 
-    public String getName() {
-        return name;
+    public String getNo() {
+        return no;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNo(String no) {
+        this.no = no;
     }
 
     public String getPassword() {

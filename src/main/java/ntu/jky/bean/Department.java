@@ -1,15 +1,13 @@
-package edu.ntu.bean;
+package ntu.jky.bean;
 
 /**
- * @author jiangkeyi
- * date 2020/03/15
+ * 部门类
  */
 
 public class Department {
     private Integer id;
     private String no;
     private String name;
-    private Staff staff;
 
     public Integer getId() {
         return id;
@@ -33,13 +31,5 @@ public class Department {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Staff getStaff() {
-        return staff;
-    }
-
-    public void setStaff(Staff staff) {
-        this.staff = staff;
     }
 }

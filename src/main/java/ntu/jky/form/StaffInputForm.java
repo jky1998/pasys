@@ -1,4 +1,4 @@
-package edu.ntu.form;
+package ntu.jky.form;
 
 import java.util.Date;
 
@@ -8,7 +8,7 @@ public class StaffInputForm {
     private Integer gender;
     private String password;
     private Date workdate;
-    private String position;
+    private Integer position;
     private String mail;
     private String phone;
     private String idcard;
@@ -55,11 +55,11 @@ public class StaffInputForm {
         this.workdate = workdate;
     }
 
-    public String getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(Integer position) {
         this.position = position;
     }
 

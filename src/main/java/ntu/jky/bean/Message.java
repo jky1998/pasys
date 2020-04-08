@@ -1,5 +1,8 @@
-package edu.ntu.bean;
+package ntu.jky.bean;
 
+/**
+ * 返回给前端的信息类
+ */
 public class Message {
     private boolean flag;
     private String msg;

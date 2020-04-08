@@ -10,6 +10,8 @@
     <script type="text/javascript" src="../../assets/jquery/jquery-2.2.4.min.js"
             th:src="@{../../assets/jquery/jquery-2.2.4.min.js}"></script>
     <script type="text/javascript" src="../../assets/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../assets/bootstrap-3.3.7-dist/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="../../assets/bootstrap-3.3.7-dist/js/bootstrap-datepicker.zh-CN.js"></script>
 </head>
 <body>
     <div th:include="/common/head::NavHead" id="head" class="header"></div>
@@ -19,6 +21,21 @@
             <div class="form_title">
                 <span>人员管理</span>
             </div>
+            <form class="form-horizontal staff_form">
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="no" name="no" placeholder="请输入要查询的工号">
+                </div>
+                <div class="col-sm-2">
+                    <select class="form-control" id="departmentId" name="departmentId">
+                        <option value="0">请选择部门</option>
+                    </select>
+                </div>
+                <div>
+                    <input type="submit" value="查询" class="btn form_btn">
+                    <input id="show_update" type="button" value="修改" class="btn form_btn">
+                    <input id="delete" type="button" value="删除" class="btn form_btn">
+                </div>
+            </form>
             <table class="table table-striped table-bordered staff_tbl">
                 <tr>
                     <th></th>
@@ -35,14 +52,20 @@
                     <th>地址</th>
                 </tr>
                 <tr th:each="s:${staffList}">
-                    <td><input type="checkbox" class="check_id" th:value="${s.id}"></td>
+                    <td><input type="checkbox" name="staffId" class="check_id" th:value="${s.id}"></td>
                     <td th:text="${s.no}"></td>
                     <td th:text="${s.name}"></td>
-                    <td th:text="${s.gender}"></td>
+                    <td>
+                        <span th:if="${s.gender} eq '0'">男</span>
+                        <span th:if="${s.gender} eq '1'">女</span>
+                    </td>
                     <td th:text="${s.password}"></td>
-                    <td th:text="${s.workdate}"></td>
+                    <td th:text="${s.formatdate}"></td>
                     <td th:text="${s.department.name}"></td>
-                    <td th:text="${s.position}"></td>
+                    <td>
+                        <span th:if="${s.position} eq '1'">部长</span>
+                        <span th:if="${s.position} eq '2'">职员</span>
+                    </td>
                     <td th:text="${s.phone}"></td>
                     <td th:text="${s.mail}"></td>
                     <td th:text="${s.idcard}"></td>
@@ -51,7 +74,111 @@
             </table>
         </div>
     </div>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="updateStaff" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">修改用户信息</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal" style="color: #5e5e5e">
+                        <div class="form-group" style="display: none;">
+                            <label for="staffId" class="col-sm-2 control-label">编号</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="staffId" name="staffId">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="updateNo" class="col-sm-2 control-label">工号</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="updateNo" name="updateNo">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">姓名</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="name" name="name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">性别</label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline" for="male">
+                                    <input type="radio" name="gender" id="male" value="0" checked> 男
+                                </label>
+                                <label class="radio-inline" for="female">
+                                    <input type="radio" name="gender" id="female" value="1"> 女
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="workdate" class="col-sm-2 control-label">入职日期</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="workdate" name="workdate" placeholder="请选择入职日期">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="department" class="col-sm-2 control-label">部门</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="department" name="department">
+                                    <option value="0">请选择</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="position" class="col-sm-2 control-label">职位</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="position" name="position">
+                                    <option value="0">请选择</option>
+                                    <option value="1">部长</option>
+                                    <option value="2">职员</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="col-sm-2 control-label">联系电话</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="phone" name="phone">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="mail" class="col-sm-2 control-label">邮箱</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="mail" name="mail">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="idcard" class="col-sm-2 control-label">身份证号</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="idcard" name="idcard">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address" class="col-sm-2 control-label">地址</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="address" name="address">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-sm-2 control-label">密码</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="password" name="password">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="submit_update">提交更改</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
 </body>
+<script type="text/javascript" src="../../js/staff/common.js"
+        th:src="@{../../js/staff/common.js}"></script>
 <script type="text/javascript" src="../../js/staff/manage.js"
         th:src="@{../../js/staff/manage.js}"></script>
 </html>

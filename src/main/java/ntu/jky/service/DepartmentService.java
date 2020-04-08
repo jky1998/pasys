@@ -1,7 +1,7 @@
-package edu.ntu.service;
+package ntu.jky.service;
 
-import edu.ntu.bean.Department;
-import edu.ntu.dao.DepartmentDao;
+import ntu.jky.bean.Department;
+import ntu.jky.dao.DepartmentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
