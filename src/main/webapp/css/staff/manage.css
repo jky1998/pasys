@@ -12,24 +12,6 @@ ul {list-style: none;}
     margin-top: 20px;
 }
 
-.form_btn {
-    background: #5e5e5e;
-    color: white;
-}
-
-.form_btn:hover {
-    color: white;
-}
-
-.form_btn:active {
-    color: white;
-}
-
-.form_btn:focus {
-    color: white;
-    outline: 0;
-}
-
 .staff_tbl {
     margin-top: 20px;
 }

@@ -31,7 +31,7 @@
     <mvc:default-servlet-handler/>
 
     <!-- 扫描业务代码 -->
-    <context:component-scan base-package="edu.ntu"/>
+    <context:component-scan base-package="ntu.jky"/>
 
     <!-- 配置视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

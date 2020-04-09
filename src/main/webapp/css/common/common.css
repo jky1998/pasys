@@ -110,15 +110,6 @@ h3 {margin: 0;}
     background: #5e5e5e;
 }
 
-.hide_title a:focus {
-    text-decoration: none;
-    color: white;
-}
-
-.hide_title>a>li:focus {
-    background: #5e5e5e;
-}
-
 /*页面*/
 .content {
     display: flex;
@@ -140,4 +131,22 @@ h3 {margin: 0;}
     padding-left: 30px;
     border-radius: 5px;
     width: 100%;
+}
+
+.form_btn {
+    background: #5e5e5e;
+    color: white;
+}
+
+.form_btn:hover {
+    color: white;
+}
+
+.form_btn:active {
+    color: white;
+}
+
+.form_btn:focus {
+    color: white;
+    outline: 0;
 }

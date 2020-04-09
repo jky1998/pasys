@@ -54,7 +54,7 @@ $(document).ready(function() {
             // 弹出dialog
             var updateBtn = document.getElementById("show_update");
             updateBtn.setAttribute("data-toggle", "modal");
-            updateBtn.setAttribute("data-target", "#updateStaff");
+            //updateBtn.setAttribute("data-target", "#updateStaff");
         }
     });
 

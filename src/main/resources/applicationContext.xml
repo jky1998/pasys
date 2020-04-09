@@ -33,7 +33,7 @@
     <!-- 扫描MyBatis的mapper接口 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--扫描所有dao接口的实现，加入到ioc容器中 -->
-        <property name="basePackage" value="edu.ntu.dao"/>
+        <property name="basePackage" value="ntu.jky.dao"/>
     </bean>
 
 

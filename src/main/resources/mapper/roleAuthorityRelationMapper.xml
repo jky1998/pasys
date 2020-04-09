@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ntu.jky.dao.RoleAuthorityRelationDao">
+    <resultMap id="relationResultMap" type="ntu.jky.bean.RoleAuthorityRelation">
+        <id property="id" column="ra_id"/>
+        <association property="role" resultMap="roleResultMap"/>
+        <association property="authority" resultMap="authorityResultMap"/>
+    </resultMap>
+    <resultMap id="roleResultMap" type="ntu.jky.bean.Role">
+        <id property="id" column="r_id"/>
+        <result property="name" column="r_name"/>
+        <result property="comment" column="r_comment"/>
+    </resultMap>
+    <resultMap id="authorityResultMap" type="ntu.jky.bean.Authority">
+        <id property="id" column="a_id"/>
+        <result property="name" column="a_name"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="relationResultMap">
+        select ra.ra_id,
+          ra.ra_role_id,
+          ra.ra_authority_id,
+          r.r_id,
+          r.r_name,
+          r.r_comment,
+          a.a_id,
+          a.a_name
+        from role_authority_relation as ra
+        left join role as r on ra.ra_role_id = r.r_id
+        left join authority as a on ra.ra_authority_id = a.a_id
+        <where>
+            <if test="role != null">
+                and r.r_id=#{role.id}
+            </if>
+        </where>
+    </select>
+</mapper>
