@@ -36,4 +36,22 @@
             </if>
         </where>
     </select>
+
+    <insert id="add">
+        insert into role_authority_relation(
+          ra_role_id,
+          ra_authority_id
+        )
+        values (
+          #{role.id},
+          #{authority.id}
+        )
+    </insert>
+
+    <delete id="delete">
+        delete from role_authority_relation where ra_id in
+        <foreach collection="list" item="ids" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </delete>
 </mapper>

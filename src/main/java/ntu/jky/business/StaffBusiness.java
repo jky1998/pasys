@@ -92,7 +92,7 @@ public class StaffBusiness {
         Staff staff = staffService.findById(id);
         // no重复
         Staff existStaff = staffService.findByNo(form.getNo());
-        if (existStaff != null) {
+        if (existStaff != null && !(existStaff.getId().equals(id))) {
             msg.setFlag(false);
             msg.setMsg("工号" + existStaff.getNo() + "已存在！");
         } else {

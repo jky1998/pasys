@@ -7,6 +7,14 @@ public class Message {
     private boolean flag;
     private String msg;
 
+    public Message() {
+    }
+
+    public Message(boolean flag, String msg) {
+        this.flag = flag;
+        this.msg = msg;
+    }
+
     public boolean isFlag() {
         return flag;
     }

@@ -21,12 +21,13 @@
             </div>
             <div class="authority_content">
                 <div class="select_role">
-                    <label for="role" class="col-sm-6 control-label">群组:</label>
                     <div class="col-sm-6">
                         <select class="form-control" id="role" name="role">
-                            <option value="0">请选择</option>
+                            <option value="0">请选择群组</option>
                         </select>
                     </div>
+                    <input type="button" id="update" value="保存" class="btn form_btn">
+                    <input type="button" id="reset" value="刷新" class="btn form_btn">
                 </div>
                 <div class="select_content">
                     <div class="select_authority">
@@ -87,10 +88,6 @@
                             </li>
                         </ul>
                     </div>
-                </div>
-                <div class="buttons">
-                    <input type="button" value="保存" class="btn form_btn" style="margin-right: 100px">
-                    <input type="button" value="刷新" class="btn form_btn">
                 </div>
             </div>
         </div>

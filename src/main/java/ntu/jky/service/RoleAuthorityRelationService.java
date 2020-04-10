@@ -21,4 +21,12 @@ public class RoleAuthorityRelationService {
         List<RoleAuthorityRelation> relations = relationDao.findAll(relation);
         return relations;
     }
+
+    public void add(RoleAuthorityRelation relation) {
+        relationDao.add(relation);
+    }
+
+    public void delete(List<Integer> ids) {
+        relationDao.delete(ids);
+    }
 }

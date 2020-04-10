@@ -6,7 +6,6 @@
 .authority_content {
     width: calc(100vw - 220px);
     height: 500px;
-    border: 1px gainsboro solid;
     margin: 10px 0;
 }
 
@@ -15,7 +14,6 @@
     padding: 2px 0;
     width: calc(100vw - 230px);
     height: 40px;
-    border: 1px gainsboro solid;
 }
 
 label {
@@ -29,7 +27,6 @@ label {
     width: calc(100vw - 230px);
     height: 410px;
     margin: 5px;
-    border: 1px gainsboro solid;
 }
 
 .select_authority
@@ -37,7 +34,7 @@ label {
     width: 50%;
     height: calc(100% - 10px);
     margin: 5px;
-    border: 2px darkgray solid;
+    border: 1px lightgray solid;
     padding: 10px;
 }
 
@@ -71,12 +68,4 @@ label {
 .hide_li {
     padding-left: 20px;
     display: none;
-}
-
-.buttons {
-    text-align: center;
-}
-
-.form_btn {
-    width: 100px;
 }
