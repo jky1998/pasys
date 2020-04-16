@@ -18,6 +18,7 @@ public class Staff {
     private String idcard;
     private String address;
     private Department department;
+    private Role role;
     private String formatdate;
 
     public String getFormatdate() {
@@ -122,5 +123,13 @@ public class Staff {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

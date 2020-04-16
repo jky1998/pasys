@@ -17,11 +17,18 @@
         <result property="address" column="s_address"/>
         <association property="department"
                      resultMap="departmentResultMap"/>
+        <association property="role"
+                     resultMap="roleResultMap"/>
     </resultMap>
     <resultMap id="departmentResultMap" type="ntu.jky.bean.Department">
         <id property="id" column="d_id"/>
         <result property="no" column="d_no"/>
         <result property="name" column="d_name"/>
+    </resultMap>
+    <resultMap id="roleResultMap" type="ntu.jky.bean.Role">
+        <id property="id" column="r_id"/>
+        <result property="name" column="r_name"/>
+        <result property="comment" column="r_comment"/>
     </resultMap>
 
     <select id="findAll" resultMap="staffResultMap">
@@ -38,9 +45,13 @@
           s.s_address,
           d.d_id,
           d.d_no,
-          d.d_name
+          d.d_name,
+          r.r_id,
+          r.r_name,
+          r.r_comment
         from staff as s
         left join department as d on s.s_department_id = d.d_id
+        left join role as r on s.s_role_id = r.r_id
         <where>
             <if test="id != null">
                 and s.s_id=#{id}

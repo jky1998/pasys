@@ -2,6 +2,9 @@ package ntu.jky.form;
 
 import java.util.Date;
 
+/**
+ * 用户添加和更新表单
+ */
 public class StaffInputForm {
     private String no;
     private String name;

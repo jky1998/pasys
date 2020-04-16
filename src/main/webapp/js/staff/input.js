@@ -95,7 +95,6 @@ $(document).ready(function(){
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
                 success: function (data) {
-                    //console.log(msg.flag);
                     if (data.flag === false) {
                         alert(data.msg);
                     } else if (data.flag === true) {

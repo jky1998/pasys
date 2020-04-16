@@ -1,5 +1,6 @@
 package ntu.jky.controller;
 
+import ntu.jky.authority.LoginStaff;
 import ntu.jky.bean.Staff;
 import ntu.jky.business.CommonBusiness;
 import ntu.jky.form.LoginForm;
@@ -29,6 +30,10 @@ public class CommonController {
             Staff staff = commonBusiness.getLoginStaff(form);
             // 将staff存储在session中
             model.addAttribute("staff", staff);
+            // 保存登陆用户的信息
+            commonBusiness.saveLoginStaff(form);
+            LoginStaff loginStaff = LoginStaff.getInstance();
+            model.addAttribute("loginStaff", loginStaff);
             return "/staff/input";
         } else {
             model.addAttribute("msg", "用户名或密码错误！");

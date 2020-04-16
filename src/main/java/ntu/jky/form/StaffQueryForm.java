@@ -1,6 +1,6 @@
 package ntu.jky.form;
 
-// 人员管理查询
+// 人员管理 之 查询
 public class StaffQueryForm {
     private String no;
     private int departmentId;

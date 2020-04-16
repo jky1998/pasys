@@ -2,16 +2,12 @@ package ntu.jky.controller;
 
 import ntu.jky.bean.Authority;
 import ntu.jky.bean.Message;
-import ntu.jky.bean.Staff;
 import ntu.jky.business.AuthorityBusiness;
 import ntu.jky.business.RoleAuthorityRelationBusiness;
 import ntu.jky.form.AuthorityUpdateForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -23,15 +19,8 @@ public class AuthorityController {
     private RoleAuthorityRelationBusiness relationBusiness;
 
     @RequestMapping("/index")
-    public String authority(HttpSession session, Model model) {
-        Staff staff = (Staff)session.getAttribute("staff");
-        if (staff != null) {
-            model.addAttribute("staff", staff);
-            return "/authority/index";
-        } else {
-            model.addAttribute("msg", "登陆过期，请重新登陆！");
-            return "/common/login";
-        }
+    public String authority() {
+        return "/authority/index";
     }
 
     @RequestMapping(value = "/show/{roleId}", method = RequestMethod.POST)

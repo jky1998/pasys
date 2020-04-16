@@ -3,7 +3,7 @@ package ntu.jky.business;
 import ntu.jky.bean.Department;
 import ntu.jky.bean.Message;
 import ntu.jky.bean.Staff;
-import ntu.jky.form.StaffDeleteForm;
+import ntu.jky.form.DeleteByIdForm;
 import ntu.jky.form.StaffInputForm;
 import ntu.jky.form.StaffQueryForm;
 import ntu.jky.service.StaffService;
@@ -140,7 +140,7 @@ public class StaffBusiness {
      * delete staff(s)
      * @param form
      */
-    public void delete(StaffDeleteForm form) {
+    public void delete(DeleteByIdForm form) {
         int[] ids = form.getIds();
         staffService.delete(ids);
     }

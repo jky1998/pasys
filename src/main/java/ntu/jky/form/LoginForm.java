@@ -1,8 +1,7 @@
 package ntu.jky.form;
 
 /**
- * @author jiangkeyi
- * date 2020/03/19
+ * 登陆
  */
 
 public class LoginForm {

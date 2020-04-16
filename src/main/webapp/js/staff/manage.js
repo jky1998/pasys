@@ -3,21 +3,14 @@ $(document).ready(function() {
         language:"zh-CN"
     });
 
+    // 查询显示部门选项
+    showDepartments("departmentId");
+
     // 修改员工信息
     $("#show_update").click(function () {
 
         // 显示部门选项
-        var department = document.getElementById("department");
-        $.ajax({
-            url: "/department/show",
-            type: 'GET',
-            dataType: "json",
-            success: function (data) {
-                for (var i in data) {
-                    department.options.add(new Option(data[i].name, data[i].id));
-                }
-            }
-        });
+        showDepartments("department");
 
         // 显示要修改的员工信息
         var ids = [];
@@ -54,7 +47,6 @@ $(document).ready(function() {
             // 弹出dialog
             var updateBtn = document.getElementById("show_update");
             updateBtn.setAttribute("data-toggle", "modal");
-            //updateBtn.setAttribute("data-target", "#updateStaff");
         }
     });
 
@@ -173,5 +165,19 @@ $(document).ready(function() {
             })
         }
     });
+
+    function showDepartments(idName) {
+        var department = document.getElementById(idName);
+        $.ajax({
+            url: "/department/show",
+            type: 'GET',
+            dataType: "json",
+            success: function (data) {
+                for (var i in data) {
+                    department.options.add(new Option(data[i].name, data[i].id));
+                }
+            }
+        });
+    }
 
 });

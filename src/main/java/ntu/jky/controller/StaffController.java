@@ -3,7 +3,7 @@ package ntu.jky.controller;
 import ntu.jky.bean.Message;
 import ntu.jky.bean.Staff;
 import ntu.jky.business.StaffBusiness;
-import ntu.jky.form.StaffDeleteForm;
+import ntu.jky.form.DeleteByIdForm;
 import ntu.jky.form.StaffInputForm;
 import ntu.jky.form.StaffQueryForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -22,29 +21,15 @@ public class StaffController {
 
     // staff/input.html
     @RequestMapping("/input")
-    public String input(HttpSession session, Model model) {
-        Staff staff = (Staff)session.getAttribute("staff");
-        if (staff != null) {
-            model.addAttribute("staff", staff);
-            return "/staff/input";
-        } else {
-            model.addAttribute("msg", "登陆过期，请重新登陆！");
-            return "/common/login";
-        }
+    public String input() {
+        return "/staff/input";
     }
 
     @RequestMapping("/manage")
-    public String manage(@ModelAttribute StaffQueryForm form, HttpSession session, Model model) {
-        Staff staff = (Staff)session.getAttribute("staff");
+    public String manage(@ModelAttribute StaffQueryForm form, Model model) {
         List<Staff> staffList = staffBusiness.showStaff(form);
-        if (staff != null) {
-            model.addAttribute("staff", staff);
-            model.addAttribute("staffList", staffList);
-            return "/staff/manage";
-        } else {
-            model.addAttribute("msg", "登陆过期，请重新登陆！");
-            return "/common/login";
-        }
+        model.addAttribute("staffList", staffList);
+        return "/staff/manage";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -71,7 +56,7 @@ public class StaffController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     @ResponseBody
-    public String delete(@RequestBody StaffDeleteForm form) {
+    public String delete(@RequestBody DeleteByIdForm form) {
         staffBusiness.delete(form);
         return "success";
     }
