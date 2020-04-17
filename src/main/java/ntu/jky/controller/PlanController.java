@@ -26,6 +26,12 @@ public class PlanController {
         return "/plan/common";
     }
 
+    // 计划制定
+    @RequestMapping("/formulate")
+    public String formulate(Model model) {
+        return "/plan/formulate";
+    }
+
     // 添加共性目标
     @RequestMapping(value = "/common/add", method = RequestMethod.POST)
     @ResponseBody

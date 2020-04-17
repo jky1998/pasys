@@ -15,22 +15,7 @@ $(document).ready(function () {
     // 选中群组获取角色权限
     $("#role").change(function () {
         reset();
-       var roleId = $("#role").val();
-       $.ajax({
-           url: "/authority/show/" + roleId,
-           type: 'POST',
-           dataType: "json",
-           success: function (data) {
-               // 右框权限展开
-               showHideAuthorities();
-               for (var i in data) {
-                   // 右框checkbox对应群组权限选中
-                   showCheckedAuthorities("check", data[i].id);
-                   // 左框显示对应群组权限
-                   showCheckedValue("hide_li", data[i].id);
-               }
-           }
-       });
+        getAuthorities();
     });
 
     // 保存
@@ -56,8 +41,9 @@ $(document).ready(function () {
     });
 
     // 刷新
-    $("#reset").click(function () {
+    $("#refresh").click(function () {
         reset();
+        getAuthorities();
     });
 
     // 点击 + 显示具体权限
@@ -164,5 +150,25 @@ $(document).ready(function () {
                 obj[i].style.display = 'none';
             }
         }
+    }
+
+    // 获取角色已有权限
+    function getAuthorities() {
+        var roleId = $("#role").val();
+        $.ajax({
+            url: "/authority/show/" + roleId,
+            type: 'POST',
+            dataType: "json",
+            success: function (data) {
+                // 右框权限展开
+                showHideAuthorities();
+                for (var i in data) {
+                    // 右框checkbox对应群组权限选中
+                    showCheckedAuthorities("check", data[i].id);
+                    // 左框显示对应群组权限
+                    showCheckedValue("hide_li", data[i].id);
+                }
+            }
+        });
     }
 });

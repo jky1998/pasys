@@ -14,7 +14,7 @@ import java.io.IOException;
  * 获取登陆的用户
  */
 @WebFilter(filterName = "StaffFilter",
-        urlPatterns = {"/staff/input","/staff/manage","/authority/index","/plan/common"})
+        urlPatterns = {"/staff/input","/staff/manage","/authority/index","/plan/common","/plan/formulate"})
 public class StaffFilter implements Filter {
     public void destroy() {
     }
