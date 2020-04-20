@@ -1,4 +1,8 @@
 $(document).ready(function() {
+    var obj = document.getElementById("system_setup");
+    obj.style.display = 'block';
+    navLocation("staff_management", "staff_manage", "staff_manage_li");
+
     $("#workdate").datepicker ({
         language:"zh-CN"
     });
@@ -165,19 +169,18 @@ $(document).ready(function() {
             })
         }
     });
-
-    function showDepartments(idName) {
-        var department = document.getElementById(idName);
-        $.ajax({
-            url: "/department/show",
-            type: 'GET',
-            dataType: "json",
-            success: function (data) {
-                for (var i in data) {
-                    department.options.add(new Option(data[i].name, data[i].id));
-                }
-            }
-        });
-    }
-
 });
+
+function showDepartments(idName) {
+    var department = document.getElementById(idName);
+    $.ajax({
+        url: "/department/show",
+        type: 'GET',
+        dataType: "json",
+        success: function (data) {
+            for (var i in data) {
+                department.options.add(new Option(data[i].name, data[i].id));
+            }
+        }
+    });
+}

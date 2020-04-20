@@ -5,7 +5,7 @@
 <mapper namespace="ntu.jky.dao.PlanDao">
     <resultMap id="planResultMap" type="ntu.jky.bean.Plan">
         <id property="id" column="p_id"/>
-        <result property="month" column="p_month"/>
+        <result property="monthly" column="p_monthly"/>
         <result property="type" column="p_type"/>
         <result property="score" column="p_score"/>
         <result property="content" column="p_content"/>
@@ -14,7 +14,7 @@
 
     <select id="findAll" resultMap="planResultMap">
         select p_id,
-          p_month,
+          p_monthly,
           p_type,
           p_score,
           p_content,
@@ -27,12 +27,17 @@
             <if test="id != null">
                 and p_id=#{id}
             </if>
+            <if test="monthly != null">
+                <![CDATA[
+                and DATE_FORMAT(p_monthly, '%Y-%m') >=  DATE_FORMAT(#{monthly}, '%Y-%m')
+                ]]>
+            </if>
         </where>
     </select>
 
     <insert id="add">
         insert into plan(
-          p_month,
+          p_monthly,
           p_type,
           p_score,
           p_content,
@@ -40,7 +45,7 @@
           p_plan_id
         )
         values (
-            #{month},
+            #{monthly},
             #{type},
             #{score},
             #{content},
@@ -52,8 +57,8 @@
     <update id="update">
         update plan
         <set>
-            <if test="month != null">
-                p_month=#{month},
+            <if test="monthly != null">
+                p_monthly=#{monthly},
             </if>
             <if test="type != null">
                 p_type= #{type},

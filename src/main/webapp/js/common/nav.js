@@ -13,3 +13,12 @@ $(document).ready(function(){
         }
     });
 });
+
+function navLocation(boxName, aName, liName) {
+    var obj = document.getElementById(boxName);
+    obj.style.display = 'block';
+    var a = document.getElementById(aName);
+    a.style.color = "white";
+    var li = document.getElementById(liName);
+    li.style.background = "#5e5e5e";
+}

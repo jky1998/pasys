@@ -1,4 +1,8 @@
 $(document).ready(function(){
+    var obj = document.getElementById("system_setup");
+    obj.style.display = 'block';
+    navLocation("staff_management", "staff_input", "staff_input_li");
+
     $("#workdate").datepicker ({
         language:"zh-CN"
     });
@@ -111,22 +115,20 @@ $(document).ready(function(){
     $("#reset").click(function () {
         reset();
     });
-
-    // 清空方法
-    function reset() {
-        document.getElementById("no").value = "";
-        document.getElementById("name").value = "";
-        $("#female").removeAttr("checked");
-        document.getElementById("male").checked = true;
-        document.getElementById("workdate").value = "";
-        resetSelectValue("department");
-        resetSelectValue("position");
-        document.getElementById("phone").value = "";
-        document.getElementById("mail").value = "";
-        document.getElementById("idcard").value = "";
-        document.getElementById("address").value = "";
-        document.getElementById("password").value = "";
-    }
-
-
 });
+
+// 清空方法
+function reset() {
+    document.getElementById("no").value = "";
+    document.getElementById("name").value = "";
+    $("#female").removeAttr("checked");
+    document.getElementById("male").checked = true;
+    document.getElementById("workdate").value = "";
+    resetSelectValue("department");
+    resetSelectValue("position");
+    document.getElementById("phone").value = "";
+    document.getElementById("mail").value = "";
+    document.getElementById("idcard").value = "";
+    document.getElementById("address").value = "";
+    document.getElementById("password").value = "";
+}

@@ -5,6 +5,7 @@ import ntu.jky.dao.PlanDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -29,6 +30,14 @@ public class PlanService {
         } else {
             return null;
         }
+    }
+
+    // 根据月度查询
+    public List<Plan> findByMonthly(Date monthly) {
+        Plan plan = new Plan();
+        plan.setMonthly(monthly);
+        List<Plan> plans = planDao.findAll(plan);
+        return plans;
     }
 
     // 添加

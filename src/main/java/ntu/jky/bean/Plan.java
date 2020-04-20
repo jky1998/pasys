@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class Plan {
     private Integer id;   // 编号
-    private Date month;   // 月度
+    private Date monthly;   // 月度
     private Integer type;   // 计划类型
     private Float score;    // 分值
     private String content;   // 目标内容
@@ -22,12 +22,12 @@ public class Plan {
         this.id = id;
     }
 
-    public Date getMonth() {
-        return month;
+    public Date getMonthly() {
+        return monthly;
     }
 
-    public void setMonth(Date month) {
-        this.month = month;
+    public void setMonthly(Date month) {
+        this.monthly = month;
     }
 
     public Integer getType() {

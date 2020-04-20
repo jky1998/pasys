@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -24,12 +25,6 @@ public class PlanController {
         List<Plan> goals = planBusiness.getCommonGoals();
         model.addAttribute("goals",goals);
         return "/plan/common";
-    }
-
-    // 计划制定
-    @RequestMapping("/formulate")
-    public String formulate(Model model) {
-        return "/plan/formulate";
     }
 
     // 添加共性目标
@@ -56,10 +51,32 @@ public class PlanController {
         return new Message(true, "修改成功！");
     }
 
+    // 计划制定
+    @RequestMapping("/formulate")
+    public String formulate() {
+        return "/plan/formulate";
+    }
+
+    // 查看计划
+    @RequestMapping(value = "/formulate/monthly={monthly}", method = RequestMethod.POST)
+    @ResponseBody
+    public List<Plan> getMonthlyPlans(@PathVariable Date monthly) {
+        List<Plan> plans = planBusiness.getMonthlyPlans(monthly);
+        return plans;
+    }
+
+    // 复制共性目标
+    @RequestMapping(value = "/copy/monthly={monthly}", method = RequestMethod.POST)
+    @ResponseBody
+    public Message copy(@PathVariable Date monthly) {
+        Message message = planBusiness.copyCommonGoal(monthly);
+        return message;
+    }
+
     // 删除
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     @ResponseBody
-    public Message detete(@RequestBody DeleteByIdForm form) {
+    public Message delete(@RequestBody DeleteByIdForm form) {
         planBusiness.delete(form);
         return new Message(true,"删除成功！");
     }

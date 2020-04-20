@@ -38,26 +38,24 @@
                     系统设置
                     <span class="glyphicon glyphicon-triangle-bottom drop" aria-hidden="true"></span>
                 </div>
-                <ul class="hide_title">
-                    <li style="padding-left: 0px" th:each="authority : ${loginStaff.authorities}" th:if="${authority.id} eq '11'">
+                <ul class="hide_title" id="system_setup">
+                    <li style="padding-left: 0;" th:each="authority : ${loginStaff.authorities}" th:if="${authority.id} eq '11'">
                         <div style="padding-left: 40px">
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                             人员信息
                             <span class="glyphicon glyphicon-triangle-bottom drop" aria-hidden="true"></span>
                         </div>
-                        <ul class="hide_title second_title">
-                            <a th:href="@{'/staff/input'}"><li><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;人员录入</li></a>
-                            <a th:href="@{'/staff/manage'}"><li><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;人员管理</li></a>
+                        <ul class="hide_title second_title" id="staff_management">
+                            <a th:href="@{'/staff/input'}" id="staff_input"><li id="staff_input_li"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;人员录入</li></a>
+                            <a th:href="@{'/staff/manage'}" id="staff_manage"><li id="staff_manage_li"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;人员管理</li></a>
                         </ul>
                     </li>
                     <a href="#"><li><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp;基础数据</li></a>
-                    <a th:href="@{'/authority/index'}" th:each="authority:${loginStaff.authorities}" th:if="${authority.id} eq '12'"><li><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp;权限设置</li></a>
-                    <a th:href="@{'/plan/common'}" th:each="authority:${loginStaff.authorities}" th:if="${authority.id} eq '13'"><li><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp;共性目标</li></a>
+                    <a th:href="@{'/authority/index'}" th:each="authority:${loginStaff.authorities}" th:if="${authority.id} eq '12'" id="authority_setup"><li id="authority_setup_li"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp;权限设置</li></a>
+                    <a th:href="@{'/plan/common'}" th:each="authority:${loginStaff.authorities}" th:if="${authority.id} eq '13'" id="plan_common"><li id="plan_common_id"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp;共性目标</li></a>
                 </ul>
             </li>
         </ul>
-        <script type="text/javascript" src="../../js/common/nav.js"
-                th:src="@{../../js/common/nav.js}"></script>
     </div>
 </body>
 </html>
