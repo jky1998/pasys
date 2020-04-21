@@ -1,10 +1,13 @@
 package ntu.jky.controller;
 
+import com.sun.imageio.plugins.common.I18N;
 import ntu.jky.bean.Message;
 import ntu.jky.bean.Plan;
 import ntu.jky.business.PlanBusiness;
 import ntu.jky.form.CommonGoalForm;
+import ntu.jky.form.CopyDateForm;
 import ntu.jky.form.DeleteByIdForm;
+import ntu.jky.form.MonthlyPlanForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,22 +38,6 @@ public class PlanController {
         return new Message(true, "添加成功！");
     }
 
-    // 获取要修改的共性目标信息
-    @RequestMapping(value = "/getUpdatePlan/{id}", method = RequestMethod.POST)
-    @ResponseBody
-    public Plan getUpdatePlan(@PathVariable Integer id) {
-        Plan plan = planBusiness.getUpdatePlan(id);
-        return plan;
-    }
-
-    // 修改共性目标
-    @RequestMapping(value = "/common/update/{id}", method = RequestMethod.PUT)
-    @ResponseBody
-    public Message updateCommonGoal(@PathVariable Integer id, @RequestBody CommonGoalForm form) {
-        planBusiness.updateCommonGoal(id, form);
-        return new Message(true, "修改成功！");
-    }
-
     // 计划制定
     @RequestMapping("/formulate")
     public String formulate() {
@@ -65,12 +52,43 @@ public class PlanController {
         return plans;
     }
 
+    // 复制上月计划
+    @RequestMapping(value = "/copyLastPlan", method = RequestMethod.POST)
+    @ResponseBody
+    public Message copyLastPlan(@RequestBody CopyDateForm form) {
+        return planBusiness.copyLastPlan(form);
+    }
+
+    // 添加计划明细
+    @RequestMapping(value = "/monthly/add", method = RequestMethod.POST)
+    @ResponseBody
+    public Message addMonthlyPlan(@RequestBody MonthlyPlanForm form) {
+        planBusiness.addMonthlyPlan(form);
+        return new Message(true, "添加成功！");
+    }
+
     // 复制共性目标
     @RequestMapping(value = "/copy/monthly={monthly}", method = RequestMethod.POST)
     @ResponseBody
     public Message copy(@PathVariable Date monthly) {
         Message message = planBusiness.copyCommonGoal(monthly);
         return message;
+    }
+
+    // 获取要修改的目标信息
+    @RequestMapping(value = "/getUpdatePlan/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public Plan getUpdatePlan(@PathVariable Integer id) {
+        Plan plan = planBusiness.getUpdatePlan(id);
+        return plan;
+    }
+
+    // 修改
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
+    @ResponseBody
+    public Message update(@PathVariable Integer id, @RequestBody CommonGoalForm form) {
+        planBusiness.update(id, form);
+        return new Message(true, "修改成功！");
     }
 
     // 删除

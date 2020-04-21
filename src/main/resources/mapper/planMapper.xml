@@ -29,7 +29,7 @@
             </if>
             <if test="monthly != null">
                 <![CDATA[
-                and DATE_FORMAT(p_monthly, '%Y-%m') >=  DATE_FORMAT(#{monthly}, '%Y-%m')
+                and DATE_FORMAT(p_monthly, '%Y-%m') =  DATE_FORMAT(#{monthly}, '%Y-%m')
                 ]]>
             </if>
         </where>

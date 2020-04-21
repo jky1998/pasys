@@ -29,10 +29,10 @@
                         <select class="form-control" id="mm"
                                 style="width: 80px"></select>
                         <span>月</span>
-                        <input type="button" value="复制上月计划" class="btn form_btn" style="margin-left: 10px;">
-                        <input type="button" value="添加计划明细" class="btn form_btn">
+                        <input id="copyLastPlan" type="button" value="复制上月计划" class="btn form_btn" style="margin-left: 10px;">
+                        <input type="button" value="添加计划明细" class="btn form_btn" data-toggle="modal" data-target="#add">
                         <input id="copy" type="button" value="复制共性目标" class="btn form_btn">
-                        <input type="button" value="修改" class="btn form_btn">
+                        <input id="getUpdatePlan" type="button" value="修改" class="btn form_btn" data-target="#update">
                         <input id="delete" type="button" value="删除" class="btn form_btn">
                     </div>
                 </div>
@@ -47,6 +47,96 @@
             </table>
         </div>
     </div>
+    <!-- 模态框（Modal） -->
+    <!--添加计划明细-->
+    <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title">
+                        添加计划明细
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal" style="color: #5e5e5e">
+                        <div class="form-group" style="display: none;">
+                            <label for="updateId" class="col-sm-2 control-label">编号</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="updateId" name="updateId">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="addContent" class="col-sm-2 control-label">目标内容</label>
+                            <div class="col-sm-8">
+                                <textarea rows="5" class="form-control" id="addContent" name="addContent"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="addDetail" class="col-sm-2 control-label">详细信息</label>
+                            <div class="col-sm-8">
+                                <textarea rows="5" class="form-control" id="addDetail" name="addDetail"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="addScore" class="col-sm-2 control-label">分值</label>
+                            <div class="col-sm-8">
+                                <input type="text" rows="5" class="form-control" id="addScore" name="addScore">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="submit_add">提交更改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--修改计划明细-->
+    <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title">
+                        修改计划明细
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal" style="color: #5e5e5e">
+                        <div class="form-group">
+                            <label for="updateContent" class="col-sm-2 control-label">目标内容</label>
+                            <div class="col-sm-8">
+                                <textarea rows="5" class="form-control" id="updateContent" name="updateContent"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="addDetail" class="col-sm-2 control-label">详细信息</label>
+                            <div class="col-sm-8">
+                                <textarea rows="5" class="form-control" id="updateDetail" name="addDetail"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="updateScore" class="col-sm-2 control-label">分值</label>
+                            <div class="col-sm-8">
+                                <input type="text" rows="5" class="form-control" id="updateScore" name="updateScore">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="submit_update">提交更改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--详细信息-->
     <div class="modal fade" id="details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -54,7 +144,7 @@
                     <button type="button" class="close" data-dismiss="modal"
                             aria-hidden="true">×
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">
+                    <h4 class="modal-title">
                         详细信息
                     </h4>
                 </div>
@@ -66,10 +156,11 @@
                             data-dismiss="modal">关闭
                     </button>
                 </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+            </div>
+        </div>
+    </div>
 </body>
 <script type="text/javascript" src="../../js/common/nav.js"></script>
 <script type="text/javascript" src="../../js/plan/formulate.js"></script>
+<script type="text/javascript" src="../../js/plan/common.js"></script>
 </html>

@@ -4,7 +4,9 @@ import ntu.jky.bean.Message;
 import ntu.jky.bean.Plan;
 import ntu.jky.enums.PlanType;
 import ntu.jky.form.CommonGoalForm;
+import ntu.jky.form.CopyDateForm;
 import ntu.jky.form.DeleteByIdForm;
+import ntu.jky.form.MonthlyPlanForm;
 import ntu.jky.service.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -40,15 +42,6 @@ public class PlanBusiness {
         return plan;
     }
 
-    // 修改共性目标
-    public void updateCommonGoal(Integer id, CommonGoalForm form) {
-        Plan plan = getUpdatePlan(id);
-        plan.setScore(form.getScore());
-        plan.setContent(form.getContent());
-        plan.setDetail(form.getDetail());
-        planService.update(plan);
-    }
-
     // 计划制定
     // 查看月计划
     public List<Plan> getMonthlyPlans(Date monthly) {
@@ -56,10 +49,35 @@ public class PlanBusiness {
         return plans;
     }
 
+    // 复制上月计划
+    public Message copyLastPlan(CopyDateForm form) {
+        List<Plan> plans = planService.findByMonthly(form.getLastMonthly());
+        if (plans.size() != 0) {
+            for (Plan plan : plans) {
+                plan.setMonthly(form.getMonthly());
+                planService.add(plan);
+            }
+            return new Message(true, "复制成功！");
+        } else {
+            return new Message(false, "上月计划为空！");
+        }
+    }
+
+    // 添加计划明细
+    public void addMonthlyPlan(MonthlyPlanForm form) {
+        Plan plan = new Plan();
+        plan.setType(PlanType.MONTHLY_PLAN);
+        plan.setContent(form.getContent());
+        plan.setDetail(form.getDetail());
+        plan.setMonthly(form.getMonthly());
+        plan.setScore(form.getScore());
+        planService.add(plan);
+    }
+
     // 复制共性计划
     public Message copyCommonGoal(Date monthly) {
         List<Plan> goals = planService.findByType(PlanType.COMMON_GOAL);
-        if (goals != null) {
+        if (goals.size() != 0) {
             for (Plan goal : goals) {
                 goal.setMonthly(monthly);
                 goal.setType(PlanType.MONTHLY_PLAN);
@@ -69,6 +87,15 @@ public class PlanBusiness {
         } else {
             return new Message(false, "共性目标为空！");
         }
+    }
+
+    // 修改
+    public void update(Integer id, CommonGoalForm form) {
+        Plan plan = getUpdatePlan(id);
+        plan.setScore(form.getScore());
+        plan.setContent(form.getContent());
+        plan.setDetail(form.getDetail());
+        planService.update(plan);
     }
 
     // 删除
