@@ -60,4 +60,11 @@ public class StaffController {
         staffBusiness.delete(form);
         return "success";
     }
+
+    // 根据部门查员工
+    @RequestMapping(value = "/show/{departmentId}", method = RequestMethod.POST)
+    @ResponseBody
+    public List<Staff> showStaffs(@PathVariable Integer departmentId) {
+        return staffBusiness.findByDepartmentId(departmentId);
+    }
 }

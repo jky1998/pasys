@@ -145,4 +145,16 @@ public class StaffBusiness {
         staffService.delete(ids);
     }
 
+    // 根据部门查员工
+    public List<Staff> findByDepartmentId(Integer id) {
+        Staff staff = new Staff();
+        if (id != 0) {
+            Department department = new Department();
+            department.setId(id);
+            staff.setDepartment(department);
+        }
+        List<Staff> list = staffService.findAll(staff);
+        return list;
+    }
+
 }

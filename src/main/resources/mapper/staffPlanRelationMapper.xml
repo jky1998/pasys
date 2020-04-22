@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ntu.jky.dao.StaffPlanRelationDao">
+    <insert id="add">
+        insert into staff_plan_relation(
+          sp_staff_id,
+          sp_plan_id
+        )
+        values (
+          #{staff.id},
+          #{plan.id}
+        )
+    </insert>
+</mapper>

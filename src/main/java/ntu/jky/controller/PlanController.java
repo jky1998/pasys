@@ -1,6 +1,5 @@
 package ntu.jky.controller;
 
-import com.sun.imageio.plugins.common.I18N;
 import ntu.jky.bean.Message;
 import ntu.jky.bean.Plan;
 import ntu.jky.business.PlanBusiness;
@@ -81,6 +80,12 @@ public class PlanController {
     public Plan getUpdatePlan(@PathVariable Integer id) {
         Plan plan = planBusiness.getUpdatePlan(id);
         return plan;
+    }
+
+    // 责任分解录入
+    @RequestMapping("/input")
+    public String input(){
+        return "/plan/input";
     }
 
     // 修改
