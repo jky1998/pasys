@@ -3,6 +3,72 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ntu.jky.dao.StaffPlanRelationDao">
+    <resultMap id="relationResultMap" type="ntu.jky.bean.StaffPlanRelation">
+        <id property="id" column="sp_id"/>
+        <association property="staff" resultMap="staffResultMap"/>
+        <association property="plan" resultMap="planResultMap"/>
+    </resultMap>
+    <resultMap id="staffResultMap" type="ntu.jky.bean.Staff">
+        <id property="id" column="s_id"/>
+        <result property="no" column="s_no"/>
+        <result property="name" column="s_name"/>
+        <result property="gender" column="s_gender"/>
+        <result property="password" column="s_password"/>
+        <result property="workdate" column="s_workdate"/>
+        <result property="position" column="s_position"/>
+        <result property="mail" column="s_mail"/>
+        <result property="phone" column="s_phone"/>
+        <result property="idcard" column="s_idcard"/>
+        <result property="address" column="s_address"/>
+        <association property="department"
+                     resultMap="departmentResultMap"/>
+    </resultMap>
+    <resultMap id="departmentResultMap" type="ntu.jky.bean.Department">
+        <id property="id" column="d_id"/>
+        <result property="no" column="d_no"/>
+        <result property="name" column="d_name"/>
+    </resultMap>
+    <resultMap id="planResultMap" type="ntu.jky.bean.Plan">
+        <id property="id" column="p_id"/>
+        <result property="monthly" column="p_monthly"/>
+        <result property="type" column="p_type"/>
+        <result property="score" column="p_score"/>
+        <result property="content" column="p_content"/>
+        <result property="detail" column="p_detail"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="relationResultMap">
+        select sp.sp_id,
+          s.s_id,
+          s.s_no,
+          s.s_name,
+          d.d_id,
+          d.d_name,
+          p.p_id,
+          p.p_monthly,
+          p.p_type,
+          p.p_score,
+          p.p_content,
+          p.p_detail
+          from staff_plan_relation as sp
+          left join plan as p on p.p_id = sp.sp_plan_id
+          left join staff as s on s.s_id = sp.sp_staff_id
+          left join department as d on s.s_department_id = d.d_id
+          <where>
+              <if test="staff != null and staff.id != null">
+                  and s.s_id=#{staff.id}
+              </if>
+              <if test="staff != null and staff.department != null">
+                  and d.d_id=#{staff.department.id}
+              </if>
+              <if test="plan != null">
+                  <![CDATA[
+                and DATE_FORMAT(p.p_monthly, '%Y-%m') =  DATE_FORMAT(#{plan.monthly}, '%Y-%m')
+                ]]>
+              </if>
+          </where>
+    </select>
+
     <insert id="add">
         insert into staff_plan_relation(
           sp_staff_id,

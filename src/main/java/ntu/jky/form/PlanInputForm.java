@@ -1,7 +1,7 @@
 package ntu.jky.form;
 
 // 责任分解
-public class ResponseBreakdownForm {
+public class PlanInputForm {
     private Integer[] planIds;
     private Integer[] staffIds;
 

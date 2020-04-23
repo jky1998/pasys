@@ -2,6 +2,9 @@ package ntu.jky.dao;
 
 import ntu.jky.bean.StaffPlanRelation;
 
+import java.util.List;
+
 public interface StaffPlanRelationDao {
-    public void add(StaffPlanRelation relation);    // 添加
+    List<StaffPlanRelation> findAll(StaffPlanRelation relation);
+    void add(StaffPlanRelation relation);    // 添加
 }

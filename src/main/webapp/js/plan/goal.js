@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    navLocation("system_setup", "plan_common", "plan_common_id");
+    navLocation("system_setup", "plan_common", "plan_common_li");
 
     var scores = document.getElementsByClassName("score");
     var totalScore = 0.0;

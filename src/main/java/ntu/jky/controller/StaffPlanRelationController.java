@@ -2,13 +2,10 @@ package ntu.jky.controller;
 
 import ntu.jky.bean.Message;
 import ntu.jky.business.StaffPlanRelationBusiness;
-import ntu.jky.form.ResponseBreakdownForm;
+import ntu.jky.form.PlanInputForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/response")
@@ -18,7 +15,7 @@ public class StaffPlanRelationController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
-    public Message add(@RequestBody ResponseBreakdownForm form) {
+    public Message add(@RequestBody PlanInputForm form) {
         relationBusiness.add(form);
         return new Message(true, "添加成功！");
     }

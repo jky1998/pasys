@@ -85,20 +85,6 @@ $(document).ready(function () {
     });
 });
 
-function showDepartments(idName) {
-    var department = document.getElementById(idName);
-    $.ajax({
-        url: "/department/show",
-        type: 'GET',
-        dataType: "json",
-        success: function (data) {
-            for (var i in data) {
-                department.options.add(new Option(data[i].name, data[i].id));
-            }
-        }
-    });
-}
-
 function showStaffs() {
     // 清空表
     $("#staff_tbl tr:not(:first)").html("");
@@ -123,7 +109,6 @@ function showStaffs() {
 function showPlans() {
     var date = getMonthly();
     $("#plan").empty();
-    var plan = document.getElementById("plan");
     $.ajax({
         url: "/plan/formulate/monthly=" + date,
         type: 'POST',

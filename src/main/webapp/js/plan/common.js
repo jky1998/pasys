@@ -1,3 +1,17 @@
+function showDepartments(idName) {
+    var department = document.getElementById(idName);
+    $.ajax({
+        url: "/department/show",
+        type: 'GET',
+        dataType: "json",
+        success: function (data) {
+            for (var i in data) {
+                department.options.add(new Option(data[i].name, data[i].id));
+            }
+        }
+    });
+}
+
 function checkContent(content) {
     if (content === "") {
         alert("目标内容不可为空！");

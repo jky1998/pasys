@@ -2,11 +2,10 @@ package ntu.jky.controller;
 
 import ntu.jky.bean.Message;
 import ntu.jky.bean.Plan;
+import ntu.jky.bean.StaffPlanRelation;
 import ntu.jky.business.PlanBusiness;
-import ntu.jky.form.CommonGoalForm;
-import ntu.jky.form.CopyDateForm;
-import ntu.jky.form.DeleteByIdForm;
-import ntu.jky.form.MonthlyPlanForm;
+import ntu.jky.business.StaffPlanRelationBusiness;
+import ntu.jky.form.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +19,8 @@ import java.util.List;
 public class PlanController {
     @Autowired
     private PlanBusiness planBusiness;
+    @Autowired
+    private StaffPlanRelationBusiness relationBusiness;
 
     // 共性目标
     @RequestMapping("/common")
@@ -82,12 +83,6 @@ public class PlanController {
         return plan;
     }
 
-    // 责任分解录入
-    @RequestMapping("/input")
-    public String input(){
-        return "/plan/input";
-    }
-
     // 修改
     @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
     @ResponseBody
@@ -102,5 +97,20 @@ public class PlanController {
     public Message delete(@RequestBody DeleteByIdForm form) {
         planBusiness.delete(form);
         return new Message(true,"删除成功！");
+    }
+
+    // 责任分解录入
+    @RequestMapping("/input")
+    public String input(){
+        return "/plan/input";
+    }
+
+    // 责任分解管理
+    @RequestMapping("/manage")
+    public String manage(@ModelAttribute StaffPlanRelationQueryForm form, Model model) {
+        List<StaffPlanRelation> relations = relationBusiness.getRelations(form);
+        model.addAttribute("relations", relations);
+        model.addAttribute("form", form);
+        return "/plan/manage";
     }
 }
