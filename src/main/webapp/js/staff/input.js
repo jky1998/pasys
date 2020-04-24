@@ -132,3 +132,4 @@ function reset() {
     document.getElementById("address").value = "";
     document.getElementById("password").value = "";
 }
+

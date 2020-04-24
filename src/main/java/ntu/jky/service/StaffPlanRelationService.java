@@ -19,4 +19,8 @@ public class StaffPlanRelationService {
     public void add(StaffPlanRelation relation) {
         relationDao.add(relation);
     }
+
+    public void delete(int[] ids) {
+        relationDao.delete(ids);
+    }
 }

@@ -15,7 +15,7 @@ import java.io.IOException;
  */
 @WebFilter(filterName = "StaffFilter",
         urlPatterns = {"/staff/input","/staff/manage","/authority/index","/plan/common","/plan/formulate",
-            "/plan/input","/plan/manage"})
+            "/plan/input","/plan/manage","/plan/query"})
 public class StaffFilter implements Filter {
     public void destroy() {
     }

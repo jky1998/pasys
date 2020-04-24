@@ -113,4 +113,13 @@ public class PlanController {
         model.addAttribute("form", form);
         return "/plan/manage";
     }
+
+    // 责任分解管理
+    @RequestMapping("/query")
+    public String query(@ModelAttribute StaffPlanRelationQueryForm form, Model model) {
+        List<StaffPlanRelation> relations = relationBusiness.getRelations(form);
+        model.addAttribute("relations", relations);
+        model.addAttribute("form", form);
+        return "/plan/query";
+    }
 }

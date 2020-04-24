@@ -7,4 +7,5 @@ import java.util.List;
 public interface StaffPlanRelationDao {
     List<StaffPlanRelation> findAll(StaffPlanRelation relation);
     void add(StaffPlanRelation relation);    // 添加
+    void delete(int[] ids);
 }

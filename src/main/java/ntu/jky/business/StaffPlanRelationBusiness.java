@@ -4,6 +4,7 @@ import ntu.jky.bean.Department;
 import ntu.jky.bean.Plan;
 import ntu.jky.bean.Staff;
 import ntu.jky.bean.StaffPlanRelation;
+import ntu.jky.form.DeleteByIdForm;
 import ntu.jky.form.PlanInputForm;
 import ntu.jky.form.StaffPlanRelationQueryForm;
 import ntu.jky.service.StaffPlanRelationService;
@@ -66,5 +67,11 @@ public class StaffPlanRelationBusiness {
                 relationService.add(relation);
             }
         }
+    }
+
+    // 删除
+    public void delete(DeleteByIdForm form) {
+        int[] ids = form.getIds();
+        relationService.delete(ids);
     }
 }

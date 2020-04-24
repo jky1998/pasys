@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    navLocation("daily_manage", "plan_manage", "plan_manage_li");
+    navLocation("date_query", "plan_query", "plan_query_li");
     showDepartments();
     initPage();
     showStaffs();
@@ -25,45 +25,6 @@ $(document).ready(function () {
         var date = monthly[i].getAttribute("value");
         monthly[i].innerText = format(date);
     }
-
-    // 删除
-    $("#delete").click(function () {
-        var ids = [];
-        $("input[name='id']:checked").each(function () {
-            ids.push($(this).val());
-        });
-        if (ids.length === 0) {
-            alert("请先选择要删除的计划！")
-        } else {
-            $.ajax({
-                url: "/response/delete",
-                type: 'DELETE',
-                contentType: "application/json;charset=UTF-8",
-                data: JSON.stringify({
-                    ids: ids
-                }),
-                dataType: "json",
-                success: function (data) {
-                    alert(data.msg);
-                    window.location.reload();
-                }
-            });
-        }
-    });
-
-    // 全选
-    $("#selectAll").click(function () {
-        var checkbox = document.getElementsByName("id");
-        if (this.checked) {
-            for (var i = 0; i < checkbox.length; i++) {
-                checkbox[i].checked = true;
-            }
-        } else {
-            for (var i = 0; i < checkbox.length; i++) {
-                checkbox[i].checked = false;
-            }
-        }
-    });
 });
 
 function showSelected(idName, valueIdName) {

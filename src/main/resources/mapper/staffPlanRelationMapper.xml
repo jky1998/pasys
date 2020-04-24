@@ -79,4 +79,11 @@
           #{plan.id}
         )
     </insert>
+
+    <delete id="delete">
+        delete from staff_plan_relation where sp_id in
+        <foreach collection="array" item="ids" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </delete>
 </mapper>
