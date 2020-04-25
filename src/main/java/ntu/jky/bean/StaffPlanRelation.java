@@ -4,6 +4,7 @@ public class StaffPlanRelation {
     private Integer id;
     private Staff staff;
     private Plan plan;
+    private Float score;
 
     public Integer getId() {
         return id;
@@ -27,5 +28,13 @@ public class StaffPlanRelation {
 
     public void setPlan(Plan plan) {
         this.plan = plan;
+    }
+
+    public Float getScore() {
+        return score;
+    }
+
+    public void setScore(Float score) {
+        this.score = score;
     }
 }

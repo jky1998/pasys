@@ -5,6 +5,7 @@
 <mapper namespace="ntu.jky.dao.StaffPlanRelationDao">
     <resultMap id="relationResultMap" type="ntu.jky.bean.StaffPlanRelation">
         <id property="id" column="sp_id"/>
+        <result property="score" column="sp_score"/>
         <association property="staff" resultMap="staffResultMap"/>
         <association property="plan" resultMap="planResultMap"/>
     </resultMap>
@@ -79,6 +80,16 @@
           #{plan.id}
         )
     </insert>
+
+    <update id="update">
+        update staff_plan_relation
+        <set>
+            <if test="score != null">
+                sp_score=#{score}
+            </if>
+        </set>
+        where sp_id=#{id}
+    </update>
 
     <delete id="delete">
         delete from staff_plan_relation where sp_id in

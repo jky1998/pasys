@@ -20,6 +20,10 @@ public class StaffPlanRelationService {
         relationDao.add(relation);
     }
 
+    public void update(StaffPlanRelation relation) {
+        relationDao.update(relation);
+    }
+
     public void delete(int[] ids) {
         relationDao.delete(ids);
     }

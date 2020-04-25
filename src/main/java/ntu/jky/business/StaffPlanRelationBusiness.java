@@ -1,16 +1,17 @@
 package ntu.jky.business;
 
+import ntu.jky.authority.LoginStaff;
 import ntu.jky.bean.Department;
 import ntu.jky.bean.Plan;
 import ntu.jky.bean.Staff;
 import ntu.jky.bean.StaffPlanRelation;
 import ntu.jky.form.DeleteByIdForm;
 import ntu.jky.form.PlanInputForm;
+import ntu.jky.form.SelfScoreAddForm;
 import ntu.jky.form.StaffPlanRelationQueryForm;
 import ntu.jky.service.StaffPlanRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -21,7 +22,7 @@ public class StaffPlanRelationBusiness {
     @Autowired
     private StaffPlanRelationService relationService;
 
-    // 查关联
+    // 责任分解管理查关联
     public List<StaffPlanRelation> getRelations(StaffPlanRelationQueryForm form) {
         StaffPlanRelation relation = new StaffPlanRelation();
         Staff staff = new Staff();
@@ -66,6 +67,30 @@ public class StaffPlanRelationBusiness {
                 relation.setPlan(plan);
                 relationService.add(relation);
             }
+        }
+    }
+
+    // 根据用户查关联
+    public List<StaffPlanRelation> showSelfRelations(Date monthly) {
+        LoginStaff loginStaff = LoginStaff.getInstance();
+        StaffPlanRelation relation = new StaffPlanRelation();
+        if (loginStaff != null) {
+            Staff staff = new Staff();
+            staff.setId(loginStaff.getId());
+            relation.setStaff(staff);
+        }
+        if (monthly != null) {
+            Plan plan = new Plan();
+            plan.setMonthly(monthly);
+            relation.setPlan(plan);
+        }
+        return relationService.findAll(relation);
+    }
+
+    // 自我评分
+    public void addSelfScores(SelfScoreAddForm form) {
+        for (StaffPlanRelation relation : form.getRelations()) {
+            relationService.update(relation);
         }
     }
 
