@@ -30,7 +30,8 @@
                                 style="width: 80px"></select>
                         <span>月</span>
                         <input id="save" type="button" value="保存" class="btn form_btn" style="margin-left: 10px;">
-                        <input type="button" value="完成进度" class="btn form_btn" style="margin-left: 10px;">
+                        <input id="progress" type="button" value="完成进度" class="btn form_btn"
+                               data-toggle="modal" data-target="#progressModal" style="margin-left: 10px;">
                     </div>
                 </div>
             </form>
@@ -60,6 +61,34 @@
                 </div>
                 <div class="modal-body">
                     <p id="detail"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary"
+                            data-dismiss="modal">关闭
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--详细信息-->
+    <div class="modal fade" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title">
+                        完成进度
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table" id="progress_content">
+                        <tr>
+                            <th style="width: 20%">月度</th>
+                            <th>完成进度</th>
+                        </tr>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary"

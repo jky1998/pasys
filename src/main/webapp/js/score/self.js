@@ -17,6 +17,9 @@ $(document).ready(function () {
         for (var i = 0; i < scores.length; i++) {
             var id = scores[i].getAttribute("relationId") * 1.0;
             var score = scores[i].value * 1.0;
+            if (score == 0) {
+                score = -1
+            }
             var relation = {id: id, score: score};
             arr.push(relation);
         }
@@ -30,6 +33,27 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 alert(data.msg);
+            }
+        });
+    });
+
+    $("#progress").click(function () {
+        $("#progress_content tr:not(:first)").html("");
+        var obj = document.getElementById("#progress");
+        $.ajax({
+            url: "/response/progress/show",
+            type: 'GET',
+            dataType: "json",
+            success: function (data) {
+                for (var i = 0; i < data.length; i++)
+                $("#progress_content").append("<tr>"
+                    + "<td>"+ transferTime(data[i].monthly) + "</td>"
+                    + "<td><div class='progress'>" +
+                    "<div class='progress-bar' role='progressbar' aria-valuenow=" + (data[i].percent)*100 + " aria-valuemin='0' aria-valuemax='100'"
+                    + "style='width: " + (data[i].percent)*100 + "%;'>"
+                    + ((data[i].percent)*100).toFixed(1) + "%</div>" +
+                    "</div></td>"
+                    + "</tr>")
             }
         });
     });
@@ -52,11 +76,20 @@ function getPlans() {
                     + "<td>" + data[i].plan.content + "</td>"
                     + "<td class='score' value=" + data[i].plan.score + ">" + data[i].plan.score + "</td>"
                     + "<td><input type='text' class='form-control' relationId=" + data[i].id + " name='selfScore'"
-                    + "score=" + data[i].plan.score+ "></td>"
+                    + "score=" + data[i].plan.score + " " +
+                    "value= "+ data[i].score + "></td>"
                     + "<td><span class='detail' "
                     + "style='text-decoration: underline'  data-toggle='modal' data-target='#details' value="
                     + data[i].plan.detail + ">详细信息</span></td></tr>");
             }
+
+            var selfScores = document.getElementsByName("selfScore");
+            for (var i = 0; i < selfScores.length; i++) {
+                if (selfScores[i].value == -1) {
+                    selfScores[i].value = "";
+                }
+            }
+
 
             selfTbl.append("<tr>"
                 + "<td></td>"

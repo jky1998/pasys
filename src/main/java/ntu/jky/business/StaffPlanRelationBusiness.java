@@ -1,10 +1,7 @@
 package ntu.jky.business;
 
 import ntu.jky.authority.LoginStaff;
-import ntu.jky.bean.Department;
-import ntu.jky.bean.Plan;
-import ntu.jky.bean.Staff;
-import ntu.jky.bean.StaffPlanRelation;
+import ntu.jky.bean.*;
 import ntu.jky.form.DeleteByIdForm;
 import ntu.jky.form.PlanInputForm;
 import ntu.jky.form.SelfScoreAddForm;
@@ -12,10 +9,7 @@ import ntu.jky.form.StaffPlanRelationQueryForm;
 import ntu.jky.service.StaffPlanRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class StaffPlanRelationBusiness {
@@ -92,6 +86,52 @@ public class StaffPlanRelationBusiness {
         for (StaffPlanRelation relation : form.getRelations()) {
             relationService.update(relation);
         }
+    }
+
+    // 查看最近三个月的评分情况
+    public List<Progress> showSelfProgress() {
+        Date d1 = new Date();
+        StaffPlanRelation findRelation = new StaffPlanRelation();
+        LoginStaff loginStaff = LoginStaff.getInstance();
+        Staff staff = new Staff();
+        staff.setId(loginStaff.getId());
+        findRelation.setStaff(staff);
+
+        List<Progress> progresses = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            Progress progress = new Progress();
+            progress.setMonthly(d1);
+            float percent;
+            Plan plan = new Plan();
+            plan.setMonthly(d1);
+            findRelation.setPlan(plan);
+            List<StaffPlanRelation> relations = relationService.findAll(findRelation);
+            if (relations.size() != 0) {
+                float k = 0;
+                for (StaffPlanRelation relation : relations) {
+                    if (relation.getScore() != null && relation.getScore() != -1) {
+                        k++;
+                    }
+                }
+                percent = k / relations.size();
+            } else {
+                percent = 0f;
+            }
+            progress.setPercent(percent);
+            progresses.add(progress);
+            d1 = lastMonth(d1);
+        }
+        return progresses;
+    }
+
+    // 获取当前月份的前一个月
+    public Date lastMonth(Date dNow) {
+        Date dBefore;
+        Calendar calendar = Calendar.getInstance(); //得到日历
+        calendar.setTime(dNow);//把当前时间赋给日历
+        calendar.add(Calendar.MONTH, -1);  //设置为前3月
+        dBefore = calendar.getTime();   //得到前3月的时间
+        return dBefore;
     }
 
     // 删除

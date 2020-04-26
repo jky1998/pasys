@@ -40,6 +40,7 @@
 
     <select id="findAll" resultMap="relationResultMap">
         select sp.sp_id,
+          sp.sp_score,
           s.s_id,
           s.s_no,
           s.s_name,
@@ -56,6 +57,9 @@
           left join staff as s on s.s_id = sp.sp_staff_id
           left join department as d on s.s_department_id = d.d_id
           <where>
+              <if test="id != null">
+                  and sp.sp_id=#{id}
+              </if>
               <if test="staff != null and staff.id != null">
                   and s.s_id=#{staff.id}
               </if>

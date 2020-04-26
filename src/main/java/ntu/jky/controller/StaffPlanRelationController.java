@@ -1,6 +1,7 @@
 package ntu.jky.controller;
 
 import ntu.jky.bean.Message;
+import ntu.jky.bean.Progress;
 import ntu.jky.bean.StaffPlanRelation;
 import ntu.jky.business.StaffPlanRelationBusiness;
 import ntu.jky.form.DeleteByIdForm;
@@ -45,5 +46,12 @@ public class StaffPlanRelationController {
     @ResponseBody
     public List<StaffPlanRelation> showSelfRelations(@PathVariable Date monthly) {
         return relationBusiness.showSelfRelations(monthly);
+    }
+
+    // 查看进度
+    @RequestMapping(value = "/progress/show", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Progress> showSelfProgress() {
+        return relationBusiness.showSelfProgress();
     }
 }
