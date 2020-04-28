@@ -52,6 +52,7 @@ public class CommonBusiness {
      */
     public void saveLoginStaff(LoginForm form) {
         Staff staff = staffService.findByNo(form.getNo());
+        Integer departmentId = staff.getDepartment().getId();
         Integer roleId = staff.getRole().getId();
         List<Authority> authorities = authorityBusiness.getAuthorities(roleId);
 
@@ -59,6 +60,7 @@ public class CommonBusiness {
         loginStaff.setId(staff.getId());
         loginStaff.setRoleId(roleId);
         loginStaff.setName(staff.getName());
+        loginStaff.setDepartmentId(departmentId);
         loginStaff.setAuthorities(authorities);
     }
 }

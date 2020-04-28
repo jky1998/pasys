@@ -7,6 +7,7 @@ import ntu.jky.business.StaffPlanRelationBusiness;
 import ntu.jky.form.DeleteByIdForm;
 import ntu.jky.form.PlanInputForm;
 import ntu.jky.form.SelfScoreAddForm;
+import ntu.jky.form.StaffPlanFindForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -53,5 +54,13 @@ public class StaffPlanRelationController {
     @ResponseBody
     public List<Progress> showSelfProgress() {
         return relationBusiness.showSelfProgress();
+    }
+
+    // 部门评分
+    // 查看员工计划
+    @RequestMapping(value = "/department/show", method = RequestMethod.POST)
+    @ResponseBody
+    public List<StaffPlanRelation> showStaffPlans (@RequestBody StaffPlanFindForm form) {
+        return relationBusiness.showEvaluatedPlans(form);
     }
 }

@@ -1,8 +1,10 @@
 package ntu.jky.business;
 
+import ntu.jky.authority.LoginStaff;
 import ntu.jky.bean.Department;
 import ntu.jky.bean.Message;
 import ntu.jky.bean.Staff;
+import ntu.jky.enums.RoleName;
 import ntu.jky.form.DeleteByIdForm;
 import ntu.jky.form.StaffInputForm;
 import ntu.jky.form.StaffQueryForm;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -155,5 +158,15 @@ public class StaffBusiness {
         }
         List<Staff> list = staffService.findAll(staff);
         return list;
+    }
+
+    // 部门评分显示员工
+    public List<Staff> findEvaluationStaffs() {
+        LoginStaff loginStaff = LoginStaff.getInstance();
+        List<Staff> staffs = new ArrayList<>();
+        if (loginStaff.getRoleId() == RoleName.ROLE_DEPARTMENT_LEADER) {
+            staffs = findByDepartmentId(loginStaff.getDepartmentId());
+        }
+        return staffs;
     }
 }

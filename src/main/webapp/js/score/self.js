@@ -39,7 +39,6 @@ $(document).ready(function () {
 
     $("#progress").click(function () {
         $("#progress_content tr:not(:first)").html("");
-        var obj = document.getElementById("#progress");
         $.ajax({
             url: "/response/progress/show",
             type: 'GET',
@@ -85,7 +84,7 @@ function getPlans() {
 
             var selfScores = document.getElementsByName("selfScore");
             for (var i = 0; i < selfScores.length; i++) {
-                if (selfScores[i].value == -1) {
+                if (selfScores[i].value == -1 || selfScores[i].value == "null") {
                     selfScores[i].value = "";
                 }
             }

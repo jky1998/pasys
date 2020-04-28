@@ -2,10 +2,7 @@ package ntu.jky.business;
 
 import ntu.jky.authority.LoginStaff;
 import ntu.jky.bean.*;
-import ntu.jky.form.DeleteByIdForm;
-import ntu.jky.form.PlanInputForm;
-import ntu.jky.form.SelfScoreAddForm;
-import ntu.jky.form.StaffPlanRelationQueryForm;
+import ntu.jky.form.*;
 import ntu.jky.service.StaffPlanRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -138,5 +135,22 @@ public class StaffPlanRelationBusiness {
     public void delete(DeleteByIdForm form) {
         int[] ids = form.getIds();
         relationService.delete(ids);
+    }
+
+    // 部门评分
+    // 查看员工计划
+    public List<StaffPlanRelation> showEvaluatedPlans(StaffPlanFindForm form) {
+        StaffPlanRelation relation = new StaffPlanRelation();
+        if (form.getStaffId() != null) {
+            Staff staff = new Staff();
+            staff.setId(form.getStaffId());
+            relation.setStaff(staff);
+        }
+        if (form.getMonthly() != null) {
+            Plan plan = new Plan();
+            plan.setMonthly(form.getMonthly());
+            relation.setPlan(plan);
+        }
+        return relationService.findAll(relation);
     }
 }

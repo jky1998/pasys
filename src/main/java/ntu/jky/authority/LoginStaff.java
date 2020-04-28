@@ -7,6 +7,7 @@ import java.util.List;
 public class LoginStaff {
     private Integer id;          // 用户编号
     private String name;         // 用户名
+    private Integer departmentId;
     private Integer roleId;           // 用户角色
     private List<Authority> authorities;  // 用户权限
 
@@ -17,13 +18,6 @@ public class LoginStaff {
     public static LoginStaff getInstance() {
         return instance;
     }
-
-//    public void setInstance(Integer id, String name, Integer roleId, List<Authority> authorities) {
-//        this.id = id;
-//        this.name = name;
-//        this.roleId = roleId;
-//        this.authorities = authorities;
-//    }
 
     public Integer getId() {
         return id;
@@ -39,6 +33,18 @@ public class LoginStaff {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public static void setInstance(LoginStaff instance) {
+        LoginStaff.instance = instance;
     }
 
     public Integer getRoleId() {
