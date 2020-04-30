@@ -36,17 +36,17 @@ public class ScoreController {
     }
 
     // 部门评分
-    @RequestMapping(value = "/department/score", method = RequestMethod.POST)
+    @RequestMapping(value = "/department/add", method = RequestMethod.POST)
     @ResponseBody
-    public Message addDepartmentScore(@RequestBody ScoreForm form) {
+    public Message addScore(@RequestBody ScoreForm form) {
         return scoreBusiness.addDepartmentScore(form);
     }
 
     // 显示已经评过的分数
-    @RequestMapping(value = "/department/show", method = RequestMethod.POST)
+    @RequestMapping(value = "/show", method = RequestMethod.POST)
     @ResponseBody
-    public Score showDepartmentScores(@RequestBody ScoreForm form) {
-        return scoreBusiness.showDepartmentScore(form);
+    public Score showScores(@RequestBody ScoreForm form) {
+        return scoreBusiness.showScore(form);
     }
 
     // 查看进度
@@ -54,5 +54,25 @@ public class ScoreController {
     @ResponseBody
     public Progress showDepartmentProgress(@PathVariable Date monthly) {
         return scoreBusiness.showDepartmentProgress(monthly);
+    }
+
+    // 考核组考核
+    @RequestMapping("/assessor")
+    public String assessor() {
+        return "/score/assessor";
+    }
+
+    // 部门评分
+    @RequestMapping(value = "/assessor/add", method = RequestMethod.POST)
+    @ResponseBody
+    public Message addAssessorScore(@RequestBody ScoreForm form) {
+        return scoreBusiness.addAssessorScore(form);
+    }
+
+    // 查看进度
+    @RequestMapping(value = "/assessor/progress/{monthly}", method = RequestMethod.POST)
+    @ResponseBody
+    public List<Progress> showAssessorProgress(@PathVariable Date monthly) {
+        return scoreBusiness.showAssessorProgress(monthly);
     }
 }

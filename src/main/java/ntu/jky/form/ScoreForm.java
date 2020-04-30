@@ -6,6 +6,7 @@ public class ScoreForm {
     private Date monthly;
     private Float score;
     private Integer staffId;
+    private Integer type;
 
     public Date getMonthly() {
         return monthly;
@@ -29,5 +30,13 @@ public class ScoreForm {
 
     public void setStaffId(Integer staffId) {
         this.staffId = staffId;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }

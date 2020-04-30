@@ -76,11 +76,12 @@ $(document).ready(function () {
                 // 显示已经评分的分数
                 var obj = document.getElementById("departmentScore");
                 $.ajax({
-                    url: "/score/department/show",
+                    url: "/score/show",
                     type: 'POST',
                     data: JSON.stringify({
                         "monthly": monthly,
-                        "staffId": staffId
+                        "staffId": staffId,
+                        "type": 0
                     }),
                     contentType: "application/json;charset=UTF-8",
                     dataType: "json",
@@ -103,11 +104,13 @@ $(document).ready(function () {
             var score = obj.value;
             var staffId = obj.getAttribute("staffId");
             var totalScore = obj.getAttribute("totalScore");
-            if (score > totalScore) {
-                alert("评分过高！")
-            } else {
+            if (isNaN(score)) {
+                alert("请输入一个数字！");
+            } else if (score > totalScore ) {
+                alert("评分过高！");
+            }  else {
                 $.ajax({
-                    url: "/score/department/score",
+                    url: "/score/department/add",
                     type: 'POST',
                     data: JSON.stringify({
                         "monthly": monthly,
@@ -125,14 +128,6 @@ $(document).ready(function () {
         showProgress();
     });
 });
-
-function clear() {
-    var obj = document.getElementsByClassName("staff");
-    for (var i = 0; i < obj.length; i++) {
-        obj[i].style.background = "white";
-        obj[i].style.color = "#5e5e5e";
-    }
-}
 
 function showProgress() {
     $("#progress_content tr:not(:first)").html("");

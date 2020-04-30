@@ -7,6 +7,7 @@ import java.util.Date;
  */
 public class Progress {
     private Date monthly;
+    private Department department;
     private Float percent;
 
     public Date getMonthly() {
@@ -15,6 +16,14 @@ public class Progress {
 
     public void setMonthly(Date monthly) {
         this.monthly = monthly;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public Float getPercent() {

@@ -6,20 +6,23 @@
     <link href="../../assets/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../../assets/bootstrap-3.3.7-dist/css/bootstrap-datepicker.css" rel="stylesheet" media="screen"/>
     <link href="../../css/common/common.css" rel="stylesheet">
-    <link href="../../css/score/department.css" rel="stylesheet">
+    <link href="../../css/score/assessor.css" rel="stylesheet">
     <script type="text/javascript" src="../../assets/jquery/jquery-2.2.4.min.js"
             th:src="@{../../assets/jquery/jquery-2.2.4.min.js}"></script>
     <script type="text/javascript" src="../../assets/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div th:include="/common/head::NavHead" id="head" class="header"></div>
+<div th:include="/common/head::NavHead" id="head" class="header"></div>
     <div class="content">
         <div th:include="/common/nav::Nav" id="nav"></div>
-        <div class="assessment_department">
+        <div class="assessment">
             <div class="form_title">
-                <span>部门考核</span>
+                <span>考核组考核</span>
             </div>
-            <div class="form-inline department_form">
+            <div class="form-inline assessor_form">
+                <label class="control-label" style="margin-left: 10px">选择部门：</label>
+                <select class="form-control" id="department" name="department" style="width: 100px;">
+                </select>
                 <label class="control-label" style="margin-left: 10px">选择时间：</label>
                 <select class="form-control" id="yyyy"
                         style="width: 80px"></select>
@@ -31,15 +34,10 @@
                 <input id="progress" type="button" value="完成进度" class="btn form_btn"
                        data-toggle="modal" data-target="#progressModal" style="margin-left: 10px;">
             </div>
-            <div class="department_content">
+            <div class="assessor_content">
                 <div class="staff_content">
                     <table  class="table" id="staff_tbl">
-                        <tr>
-                            <th th:text="${staff.department.name}"></th>
-                        </tr>
-                        <tr th:each="staff:${staffs}">
-                            <td class="staff" th:value="${staff.id}" th:text="${staff.name}"></td>
-                        </tr>
+
                     </table>
                 </div>
                 <div class="score_content">
@@ -86,13 +84,13 @@
                             aria-hidden="true">×
                     </button>
                     <h4 class="modal-title">
-                        完成进度
+                        本月完成进度
                     </h4>
                 </div>
                 <div class="modal-body">
                     <table class="table" id="progress_content">
                         <tr>
-                            <th style="width: 20%">月度</th>
+                            <th style="width: 20%">部门</th>
                             <th>完成进度</th>
                         </tr>
                     </table>
@@ -108,6 +106,6 @@
 </body>
 <script type="text/javascript" src="../../js/common/nav.js"></script>
 <script type="text/javascript" src="../../js/score/common.js"></script>
-<script type="text/javascript" src="../../js/score/department.js"></script>
+<script type="text/javascript" src="../../js/score/assessor.js"></script>
 <script type="text/javascript" src="../../js/plan/common.js"></script>
 </html>
