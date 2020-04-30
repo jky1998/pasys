@@ -34,7 +34,7 @@ public class CommonController {
             commonBusiness.saveLoginStaff(form);
             LoginStaff loginStaff = LoginStaff.getInstance();
             model.addAttribute("loginStaff", loginStaff);
-            return "/plan/input";
+            return "/plan/index";
         } else {
             model.addAttribute("msg", "用户名或密码错误！");
             return "/common/login";

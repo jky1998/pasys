@@ -1,7 +1,5 @@
 package ntu.jky.form;
 
-import java.util.Date;
-
 public class StaffPlanRelationQueryForm {
     private Integer departmentId;
     private Integer staffId;

@@ -31,7 +31,7 @@ public class StaffPlanRelationBusiness {
             Date monthly;
             GregorianCalendar gc = new GregorianCalendar();
             gc.set(Calendar.YEAR,form.getYyyy());//设置年
-            gc.set(Calendar.MONTH, form.getMm() - 1);//这里0是1月..以此向后推
+            gc.set(Calendar.MONTH, form.getMm() - 1);
             gc.set(Calendar.DAY_OF_MONTH, 1);//设置天
             monthly = gc.getTime();
             Plan plan = new Plan();

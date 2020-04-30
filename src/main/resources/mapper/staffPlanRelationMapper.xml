@@ -72,6 +72,7 @@
                 ]]>
               </if>
           </where>
+          order by s.s_id, p.p_monthly desc
     </select>
 
     <insert id="add">

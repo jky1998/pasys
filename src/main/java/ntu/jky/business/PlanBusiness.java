@@ -1,23 +1,25 @@
 package ntu.jky.business;
 
-import ntu.jky.bean.Message;
-import ntu.jky.bean.Plan;
+import ntu.jky.bean.*;
 import ntu.jky.enums.PlanType;
-import ntu.jky.form.CommonGoalForm;
-import ntu.jky.form.CopyDateForm;
-import ntu.jky.form.DeleteByIdForm;
-import ntu.jky.form.MonthlyPlanForm;
+import ntu.jky.enums.ScoreType;
+import ntu.jky.form.*;
 import ntu.jky.service.PlanService;
+import ntu.jky.service.ScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class PlanBusiness {
     @Autowired
     private PlanService planService;
+    @Autowired
+    private StaffPlanRelationBusiness relationBusiness;
+    @Autowired
+    private ScoreService scoreService;
+
 
     // 共性目标
     // 查共性目标
@@ -102,5 +104,111 @@ public class PlanBusiness {
     public void delete(DeleteByIdForm form) {
         int[] ids = form.getIds();
         planService.delete(ids);
+    }
+
+    // 计划查询
+    public List<StaffPlanRelation> showPlanQuery(StaffPlanRelationQueryForm form) {
+        // 找员工计划关联
+        List<StaffPlanRelation> relations = relationBusiness.getRelations(form);
+        List<StaffPlanRelation> newRelations = new ArrayList<>();
+
+        Plan plan = new Plan();
+        Date monthly;
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.set(Calendar.YEAR, 0);//设置年
+        gc.set(Calendar.MONTH, 0);
+        gc.set(Calendar.DAY_OF_MONTH, 1);//设置天
+        monthly = gc.getTime();
+        plan.setMonthly(monthly);
+        Staff staff = new Staff();
+        for (StaffPlanRelation relation : relations) {
+            if (staff.getId() == null || !(staff.getId().equals(relation.getStaff().getId()))) {
+                staff.setId(relation.getStaff().getId());
+                plan.setMonthly(relation.getPlan().getMonthly());
+                newRelations.add(relation);
+            } else if (!sameDate(plan.getMonthly(), relation.getPlan().getMonthly())) {
+                plan.setMonthly(relation.getPlan().getMonthly());
+                newRelations.add(relation);
+            }
+        }
+        return newRelations;
+    }
+
+    // 完成进度
+    public List<Scores> getScores(StaffPlanFindForm form) {
+        List<Scores> scores = new ArrayList<>();
+        List<StaffPlanRelation> relations = relationBusiness.showEvaluatedPlans(form);
+
+        float total = 0;
+        float selfScore = 0;
+        // 自我评分
+        for (StaffPlanRelation relation : relations) {
+            total += relation.getPlan().getScore();
+            if (relation.getScore() != null) {
+                if (relation.getScore() != -1) {
+                    selfScore += relation.getScore();
+                }
+            }
+        }
+        Scores scores1 = new Scores();
+        scores1.setType("自我评分");
+        scores1.setTotal(total);
+        scores1.setScore(selfScore);
+        scores.add(scores1);
+
+        // 部门评分
+        Scores scores2 = new Scores();
+        scores2.setType("部门评分");
+        scores2.setTotal(total);
+        Score score = new Score();
+        Staff staff = new Staff();
+        staff.setId(form.getStaffId());
+        score.setStaff(staff);
+        score.setType(ScoreType.DEPARTMENT);
+        score.setMonthly(form.getMonthly());
+        Score sc = scoreService.findByStaff(score);
+        if (sc != null) {
+            scores2.setScore(sc.getScore());
+        } else {
+            scores2.setScore(0f);
+        }
+        scores.add(scores2);
+
+        // 考核组评分
+        score.setType(ScoreType.ASSESSOR);
+        List<Score> assessorScores = scoreService.findAll(score);
+        for (Score assessorScore : assessorScores) {
+            Scores scores3 = new Scores();
+            scores3.setType("考核组评分(" + assessorScore.getAssessor().getName() + ")");
+            scores3.setTotal(total);
+            if (assessorScore != null) {
+                scores3.setScore(assessorScore.getScore());
+            } else {
+                scores3.setScore(0f);
+            }
+            scores.add(scores3);
+        }
+
+        return scores;
+    }
+
+    public boolean sameDate(Date d1, Date d2) {
+        if(null == d1 || null == d2)
+            return false;
+        Calendar cal1 = Calendar.getInstance();
+        cal1.setTime(d1);
+        cal1.set(Calendar.DAY_OF_MONTH, 1);
+        cal1.set(Calendar.HOUR_OF_DAY, 0);
+        cal1.set(Calendar.MINUTE, 0);
+        cal1.set(Calendar.SECOND, 0);
+        cal1.set(Calendar.MILLISECOND, 0);
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTime(d2);
+        cal2.set(Calendar.DAY_OF_MONTH, 1);
+        cal2.set(Calendar.HOUR_OF_DAY, 0);
+        cal2.set(Calendar.MINUTE, 0);
+        cal2.set(Calendar.SECOND, 0);
+        cal2.set(Calendar.MILLISECOND, 0);
+        return  cal1.getTime().equals(cal2.getTime());
     }
 }

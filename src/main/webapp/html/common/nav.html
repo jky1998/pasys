@@ -26,7 +26,7 @@
                     <span class="glyphicon glyphicon-triangle-bottom drop" aria-hidden="true"></span>
                 </div>
                 <ul class="hide_title" id="date_query">
-                    <a href="#" th:each="authority:${loginStaff.authorities}" th:if="${authority.id} eq '7'"><li><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;计划查询</li></a>
+                    <a th:href="@{'/plan/index'}" th:each="authority:${loginStaff.authorities}" th:if="${authority.id} eq '7'" id="plan_index"><li id="plan_index_li"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;计划查询</li></a>
                     <a th:href="@{'/plan/query'}" th:each="authority:${loginStaff.authorities}" th:if="${authority.id} eq '8'" id="plan_query"><li id="plan_query_li"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;责任分解查询</li></a>
                     <a href="#" th:each="authority:${loginStaff.authorities}" th:if="${authority.id} eq '9'"><li><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;月统计报表</li></a>
                     <a href="#" th:each="authority:${loginStaff.authorities}" th:if="${authority.id} eq '10'"><li><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;年统计报表</li></a>

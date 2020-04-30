@@ -37,7 +37,7 @@ $(document).ready(function () {
                         + "<td>" + data[i].plan.content + "</td>"
                         + "<td class='score' value=" + data[i].plan.score + ">" + data[i].plan.score + "</td>"
                         + "<td><span class='detail' "
-                        + "style='text-decoration: underline'  data-toggle='modal' data-target='#details' value="
+                        + "style='text-decoration: underline' data-toggle='modal' data-target='#details' value="
                         + data[i].plan.detail + ">详细信息</span></td></tr>")
                 }
 

@@ -2,6 +2,7 @@ package ntu.jky.controller;
 
 import ntu.jky.bean.Message;
 import ntu.jky.bean.Plan;
+import ntu.jky.bean.Scores;
 import ntu.jky.bean.StaffPlanRelation;
 import ntu.jky.business.PlanBusiness;
 import ntu.jky.business.StaffPlanRelationBusiness;
@@ -114,7 +115,27 @@ public class PlanController {
         return "/plan/manage";
     }
 
-    // 责任分解管理
+    // 计划查询
+    @RequestMapping("/index")
+    public String index() {
+        return "/plan/index";
+    }
+
+    // 查询
+    @RequestMapping(value = "/index/query", method = RequestMethod.POST)
+    @ResponseBody
+    public List<StaffPlanRelation> showPlanQuery(@RequestBody StaffPlanRelationQueryForm form) {
+        return planBusiness.showPlanQuery(form);
+    }
+
+    // 完成进度
+    @RequestMapping(value = "/index/progress", method = RequestMethod.POST)
+    @ResponseBody
+    public List<Scores> showProgress(@RequestBody StaffPlanFindForm form) {
+        return planBusiness.getScores(form);
+    }
+
+    // 责任分解查询
     @RequestMapping("/query")
     public String query(@ModelAttribute StaffPlanRelationQueryForm form, Model model) {
         List<StaffPlanRelation> relations = relationBusiness.getRelations(form);

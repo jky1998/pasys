@@ -115,7 +115,6 @@ function showPlans() {
         dataType: "json",
         success: function (data) {
             for (var i in data) {
-                //plan.options.add(new Option(data[i].content, data[i].id));
                 $("#plan").append("<input type='checkbox' name='planId' value="
                     + data[i].id + "><span>"
                     + data[i].content + "</span><br>")

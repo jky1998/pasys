@@ -27,18 +27,6 @@ $(document).ready(function () {
     }
 });
 
-function showSelected(idName, valueIdName) {
-    var obj = document.getElementById(idName);
-    var value = document.getElementById(valueIdName).value;
-    if (value != undefined) {
-        for (var i = 0; i < obj.options.length; i++) {
-            if (obj.options[i].value == value) {
-                obj.options[i].selected = true;
-            }
-        }
-    }
-}
-
 function showDepartments() {
     var department = document.getElementById("departmentId");
     $.ajax({
@@ -55,7 +43,7 @@ function showDepartments() {
 }
 
 function showStaffs() {
-    $('#staff option').not('option:first').remove();
+    $('#staffId option').not('option:first').remove();
     var staff = document.getElementById("staffId");
     var departmentId = $("#departmentId").val();
     if (departmentId === undefined) {
@@ -74,16 +62,14 @@ function showStaffs() {
     });
 }
 
-function format(num) {
-    num = num + "";
-    var date = "";
-    var month = new Array();
-    month["Jan"] = 1; month["Feb"] = 2; month["Mar"] = 3; month["Apr"] = 4; month["May"] = 5; month["Jan"] = 6;
-    month["Jul"] = 7; month["Aug"] = 8; month["Sep"] = 9; month["Oct"] = 10; month["Nov"] = 11; month["Dec"] = 12;
-    var week = new Array();
-    week["Mon"] = "一"; week["Tue"] = "二"; week["Wed"] = "三"; week["Thu"] = "四"; week["Fri"] = "五"; week["Sat"] = "六"; week["Sun"] = "日";
-    str = num.split(" ");
-    date = str[5] + "-";
-    date = date + month[str[1]];
-    return date;
+function showSelected(idName, valueIdName) {
+    var obj = document.getElementById(idName);
+    var value = document.getElementById(valueIdName).value;
+    if (value != undefined) {
+        for (var i = 0; i < obj.options.length; i++) {
+            if (obj.options[i].value == value) {
+                obj.options[i].selected = true;
+            }
+        }
+    }
 }
