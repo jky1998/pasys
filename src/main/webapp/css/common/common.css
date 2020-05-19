@@ -150,3 +150,21 @@ h3 {margin: 0;}
     color: white;
     outline: 0;
 }
+
+/*分页*/
+.page{
+    margin: auto;
+    width: 300px;
+    text-align: center;
+    margin-top: 10px;
+}
+.page_cell{
+    float: left;
+    width: 50px;
+    border:1px solid #F5F5F5;
+    margin:2px;
+    cursor: pointer;
+}
+.page_cell:hover {
+    -webkit-box-shadow: #777 0px 0px 1px;
+}

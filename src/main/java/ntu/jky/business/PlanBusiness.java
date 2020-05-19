@@ -126,9 +126,11 @@ public class PlanBusiness {
                 staff.setId(relation.getStaff().getId());
                 plan.setMonthly(relation.getPlan().getMonthly());
                 newRelations.add(relation);
-            } else if (!sameDate(plan.getMonthly(), relation.getPlan().getMonthly())) {
-                plan.setMonthly(relation.getPlan().getMonthly());
-                newRelations.add(relation);
+            } else if(relation.getPlan().getMonthly() != null) {
+                if (!sameDate(plan.getMonthly(), relation.getPlan().getMonthly())) {
+                    plan.setMonthly(relation.getPlan().getMonthly());
+                    newRelations.add(relation);
+                }
             }
         }
         return newRelations;

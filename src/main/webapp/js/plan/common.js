@@ -75,7 +75,7 @@ function getMonthly() {
     var date = new Date();
     date.setFullYear(year);
     date.setMonth(month - 1);
-    date.setDate(1);
+    date.setDate(2);
     return date;
 }
 

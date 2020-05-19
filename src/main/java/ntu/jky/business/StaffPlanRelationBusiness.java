@@ -32,7 +32,7 @@ public class StaffPlanRelationBusiness {
             GregorianCalendar gc = new GregorianCalendar();
             gc.set(Calendar.YEAR,form.getYyyy());//设置年
             gc.set(Calendar.MONTH, form.getMm() - 1);
-            gc.set(Calendar.DAY_OF_MONTH, 1);//设置天
+            gc.set(Calendar.DAY_OF_MONTH, 2);//设置天
             monthly = gc.getTime();
             Plan plan = new Plan();
             plan.setMonthly(monthly);

@@ -19,11 +19,11 @@ $(document).ready(function () {
         if (date.getMonth() === 0) {
             lastMonthly.setFullYear(date.getFullYear() - 1);
             lastMonthly.setMonth(11);
-            lastMonthly.setDate(1);
+            lastMonthly.setDate(2);
         } else {
             lastMonthly.setFullYear(date.getFullYear());
             lastMonthly.setMonth(date.getMonth() - 1);
-            lastMonthly.setDate(1);
+            lastMonthly.setDate(2);
         }
 
         $.ajax({
