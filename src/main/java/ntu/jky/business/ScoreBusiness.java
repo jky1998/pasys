@@ -5,13 +5,16 @@ import ntu.jky.bean.*;
 import ntu.jky.enums.RoleName;
 import ntu.jky.enums.ScoreType;
 import ntu.jky.form.ScoreForm;
+import ntu.jky.form.StaffPlanRelationQueryForm;
 import ntu.jky.service.DepartmentService;
 import ntu.jky.service.ScoreService;
+import ntu.jky.service.StaffPlanRelationService;
 import ntu.jky.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +26,10 @@ public class ScoreBusiness {
     private StaffService staffService;
     @Autowired
     private DepartmentService departmentService;
+    @Autowired
+    private PlanBusiness planBusiness;
+    @Autowired
+    private StaffPlanRelationService relationService;
 
     // 部门评分
     public Message addDepartmentScore(ScoreForm form) {
@@ -69,15 +76,15 @@ public class ScoreBusiness {
             if (form.getStaffId() != null && form.getMonthly() != null) {
                 Staff staff = new Staff();
                 staff.setId(form.getStaffId());
+                Staff assessor = new Staff();
+                assessor.setId(assessorId);
                 score.setMonthly(form.getMonthly());
                 score.setType(ScoreType.ASSESSOR);
+                score.setAssessor(assessor);
                 score.setStaff(staff);
                 Score existScore = scoreService.findByStaff(score);
                 // 没有，添加记录
                 if (existScore == null) {
-                    Staff assessor = new Staff();
-                    assessor.setId(assessorId);
-                    score.setAssessor(assessor);
                     score.setScore(form.getScore());
                     scoreService.add(score);
                 } else {
@@ -97,13 +104,17 @@ public class ScoreBusiness {
     // 显示已经评分的分数
     public Score showScore(ScoreForm form) {
         Score score = new Score();
+        LoginStaff loginStaff = LoginStaff.getInstance();
         // 检查是否已经评过分
         if (form.getStaffId() != null && form.getMonthly() != null) {
             Staff staff = new Staff();
             staff.setId(form.getStaffId());
+            Staff assessor = new Staff();
+            assessor.setId(loginStaff.getId());
             score.setMonthly(form.getMonthly());
             score.setType(form.getType());
             score.setStaff(staff);
+            score.setAssessor(assessor);
             Score exist = scoreService.findByStaff(score);
             return exist;
         } else {
@@ -184,7 +195,89 @@ public class ScoreBusiness {
             progress.setPercent(percent);
             progresses.add(progress);
         }
-
         return progresses;
+    }
+
+    // 月统计报表显示
+    public List<MonthlyStatistic> showFinalScores(Date monthly) {
+        List<MonthlyStatistic> list = new ArrayList<>();
+
+        StaffPlanRelationQueryForm form = new StaffPlanRelationQueryForm();
+        Calendar c = Calendar.getInstance();
+        c.setTime(monthly);
+        form.setYyyy(c.get(Calendar.YEAR));
+        form.setMm(c.get(Calendar.MONTH) + 1);
+        List<StaffPlanRelation> relations = planBusiness.showPlanQuery(form);
+        for (StaffPlanRelation relation : relations) {
+            MonthlyStatistic monthlyStatistic = new MonthlyStatistic();
+            monthlyStatistic.setRelation(relation);
+
+            // selfScore
+            StaffPlanRelation findRelation = new StaffPlanRelation();
+            findRelation.setStaff(relation.getStaff());
+            findRelation.setPlan(relation.getPlan());
+            List<StaffPlanRelation> selfs = relationService.findAll(findRelation);
+            float selfScore = 0;
+            if (selfs.size() != 0) {
+                for (StaffPlanRelation r : selfs) {
+                    if (r.getScore() != null) {
+                        selfScore += r.getScore();
+                    }
+                }
+            }
+            if (selfScore == 0) {
+                selfScore = -1;
+            }
+            monthlyStatistic.setSelfScore(selfScore);
+
+            // departScore
+            Score findScore = new Score();
+            findScore.setStaff(relation.getStaff());
+            findScore.setType(ScoreType.DEPARTMENT);
+            List<Score> scoreList = scoreService.findAll(findScore);
+            float departScore = -1;
+            if (scoreList.size() != 0) {
+                departScore = scoreList.get(0).getScore();
+            }
+            monthlyStatistic.setDepartScore(departScore);
+
+            // assessorScore
+            findScore.setType(ScoreType.ASSESSOR);
+            scoreList = scoreService.findAll(findScore);
+            float assessorScore = -1; // 表示没有评分
+            if (scoreList.size() != 0) {
+                assessorScore = 0;
+                for (Score score : scoreList) {
+                    assessorScore += score.getScore();
+                }
+                assessorScore = assessorScore / scoreList.size();
+            }
+            monthlyStatistic.setAssessorScore(assessorScore);
+
+            // 绩效得分
+            float average = 0;
+            float times = 0;
+            if (selfScore != -1) {
+                average += selfScore;
+                times += 1;
+            }
+            if (departScore != -1) {
+                average += departScore;
+                times += 1;
+            }
+            if (assessorScore != -1) {
+                average += assessorScore;
+                times += 1;
+            }
+            if (times != 0) {
+                average = average / times;
+                monthlyStatistic.setAverage(average);
+            } else {
+                monthlyStatistic.setAverage((float) -1);
+            }
+
+            list.add(monthlyStatistic);
+        }
+        return list;
     }
 }

@@ -1,9 +1,6 @@
 package ntu.jky.controller;
 
-import ntu.jky.bean.Message;
-import ntu.jky.bean.Progress;
-import ntu.jky.bean.Score;
-import ntu.jky.bean.Staff;
+import ntu.jky.bean.*;
 import ntu.jky.business.ScoreBusiness;
 import ntu.jky.business.StaffBusiness;
 import ntu.jky.form.ScoreForm;
@@ -74,5 +71,17 @@ public class ScoreController {
     @ResponseBody
     public List<Progress> showAssessorProgress(@PathVariable Date monthly) {
         return scoreBusiness.showAssessorProgress(monthly);
+    }
+
+    // 月度统计报表
+    @RequestMapping("/monthly")
+    public String monthly() {
+        return "/score/monthly";
+    }
+
+    @RequestMapping(value = "/monthly/show/{monthly}", method = RequestMethod.POST)
+    @ResponseBody
+    public List<MonthlyStatistic> showMonthlyStatistic(@PathVariable Date monthly) {
+        return scoreBusiness.showFinalScores(monthly);
     }
 }

@@ -28,8 +28,8 @@
                 <ul class="hide_title" id="date_query">
                     <a th:href="@{'/plan/index'}" th:each="authority:${loginStaff.authorities}" th:if="${authority.id} eq '7'" id="plan_index"><li id="plan_index_li"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;计划查询</li></a>
                     <a th:href="@{'/plan/query'}" th:each="authority:${loginStaff.authorities}" th:if="${authority.id} eq '8'" id="plan_query"><li id="plan_query_li"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;责任分解查询</li></a>
-                    <a href="#" th:each="authority:${loginStaff.authorities}" th:if="${authority.id} eq '9'"><li><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;月统计报表</li></a>
-                    <a href="#" th:each="authority:${loginStaff.authorities}" th:if="${authority.id} eq '10'"><li><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;年统计报表</li></a>
+                    <a th:href="@{'/score/monthly'}" th:each="authority:${loginStaff.authorities}" th:if="${authority.id} eq '9'" id="monthly_statistic"><li id="monthly_statistic_li"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;月统计报表</li></a>
+                    <!--<a href="#" th:each="authority:${loginStaff.authorities}" th:if="${authority.id} eq '10'"><li><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;年统计报表</li></a>-->
                 </ul>
             </li>
             <li class="nav_title">
@@ -50,7 +50,7 @@
                             <a th:href="@{'/staff/manage'}" id="staff_manage"><li id="staff_manage_li"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;人员管理</li></a>
                         </ul>
                     </li>
-                    <a href="#"><li><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp;基础数据</li></a>
+                    <!--<a href="#"><li><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp;基础数据</li></a>-->
                     <a th:href="@{'/authority/index'}" th:each="authority:${loginStaff.authorities}" th:if="${authority.id} eq '12'" id="authority_setup"><li id="authority_setup_li"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp;权限设置</li></a>
                     <a th:href="@{'/plan/common'}" th:each="authority:${loginStaff.authorities}" th:if="${authority.id} eq '13'" id="plan_common"><li id="plan_common_li"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp;共性目标</li></a>
                 </ul>

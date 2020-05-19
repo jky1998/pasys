@@ -29,7 +29,7 @@ $(document).ready(function () {
         } else {
             var score = obj.value;
             var staffId = obj.getAttribute("staffId");
-            var totalScore = obj.getAttribute("totalScore");
+            var totalScore = obj.getAttribute("totalScore") * 1;
             if (isNaN(score)) {
                 alert("请输入一个数字！");
             } else if (score > totalScore ) {
@@ -47,6 +47,8 @@ $(document).ready(function () {
                     dataType: "json",
                     success: function (data) {
                         alert(data.msg);
+                        // 更新完成进度
+                        showProgress();
                     }
                 });
             }

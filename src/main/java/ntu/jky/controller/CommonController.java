@@ -4,6 +4,7 @@ import ntu.jky.authority.LoginStaff;
 import ntu.jky.bean.Staff;
 import ntu.jky.business.CommonBusiness;
 import ntu.jky.form.LoginForm;
+import ntu.jky.form.PasswordChangeForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +39,25 @@ public class CommonController {
         } else {
             model.addAttribute("msg", "用户名或密码错误！");
             return "/common/login";
+        }
+    }
+
+    // 修改密码
+    @RequestMapping("/password")
+    public String changePassword() {
+        return "/common/password";
+    }
+
+    // 修改密码
+    @RequestMapping("/check/password")
+    public String checkChangePassword(@ModelAttribute PasswordChangeForm form, Model model) {
+        boolean flag = commonBusiness.changePassword(form);
+        if (flag) {
+            model.addAttribute("msg", "修改成功！请重新登陆");
+            return "/common/login";
+        } else {
+            model.addAttribute("msg", "密码不一致！");
+            return "/common/password";
         }
     }
 }

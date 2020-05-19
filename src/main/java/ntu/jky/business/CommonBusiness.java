@@ -4,6 +4,7 @@ import ntu.jky.authority.LoginStaff;
 import ntu.jky.bean.Authority;
 import ntu.jky.bean.Staff;
 import ntu.jky.form.LoginForm;
+import ntu.jky.form.PasswordChangeForm;
 import ntu.jky.service.RoleAuthorityRelationService;
 import ntu.jky.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,5 +63,21 @@ public class CommonBusiness {
         loginStaff.setName(staff.getName());
         loginStaff.setDepartmentId(departmentId);
         loginStaff.setAuthorities(authorities);
+    }
+
+    //修改密码
+    public boolean changePassword(PasswordChangeForm form) {
+        boolean flag = false;
+        if (form.getNo() != null && form.getPassword1() != null && form.getPassword2() != null) {
+            if (form.getPassword1().equals(form.getPassword2())) {
+                flag = true;
+                Staff staff = staffService.findByNo(form.getNo());
+                if (staff != null) {
+                    staff.setPassword(form.getPassword1());
+                }
+                staffService.update(staff);
+            }
+        }
+        return flag;
     }
 }
