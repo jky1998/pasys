@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>pasys</title>
+    <link href="../../assets/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../css/common/login.css" rel="stylesheet">
+</head>
+<body>
+    <div class="content">
+        <div class="center">
+            <div class="login_title">
+                <h1>**市公路管理处</h1>
+                <h3>绩效考核系统</h3>
+            </div>
+            <div class="login_staff">
+                <div class="staff_box">
+                    <div class="login_staff_title">
+                        <span>用户登录</span>
+                        <!--存放错误信息-->
+                        <span class="msg" th:text="${msg}"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <form class="form-horizontal login_table" action="/common/check" method="post">
+                                <div class="form-group">
+                                    <label for="no" class="col-sm-3 control-label">工号</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="no" name="no">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-sm-3 control-label">密码</label>
+                                    <div class="col-sm-8">
+                                        <input type="password" class="form-control" id="password" name="password">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-3">
+                                        <input type="submit" value="提交" class="btn"
+                                               style="background-color: white; color: #5e5e5e;
+                                               margin-top: 5px; margin-left: 8px;">
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../../assets/jquery/jquery-2.2.4.min.js"></script>
+<script src="../../assets/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+</html>

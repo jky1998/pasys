@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>psays</title>
+    <link href="../../assets/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../assets/bootstrap-3.3.7-dist/css/bootstrap-datepicker.css" rel="stylesheet" media="screen"/>
+    <link href="../../css/common/common.css" rel="stylesheet">
+    <link href="../../css/setup/authority.css" rel="stylesheet">
+    <script type="text/javascript" src="../../assets/jquery/jquery-2.2.4.min.js"
+            th:src="@{../../assets/jquery/jquery-2.2.4.min.js}"></script>
+    <script type="text/javascript" src="../../assets/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div th:include="/common/head::NavHead" id="head" class="header"></div>
+    <div class="content">
+        <div th:include="/common/nav::Nav" id="nav"></div>
+        <div class="authority">
+            <div class="form_title">
+                <span>权限设置</span>
+            </div>
+            <div class="authority_content">
+                <div class="select_role">
+                    <div class="col-sm-6">
+                        <select class="form-control" id="role" name="role">
+                            <option value="0">请选择群组</option>
+                        </select>
+                    </div>
+                    <input type="button" id="update" value="保存" class="btn form_btn">
+                    <input type="button" id="refresh" value="刷新" class="btn form_btn">
+                </div>
+                <div class="select_content">
+                    <div class="select_authority">
+                        <ul>
+                            <li><button class="hide_btn">+</button> 日常管理
+                                <ul class="hide_authority">
+                                    <li><input type="checkbox" class="check" value="1"> <span>计划制定</span></li>
+                                    <li><input type="checkbox" class="check" value="2"> <span>自我评分</span></li>
+                                    <li><input type="checkbox" class="check" value="3"> <span>部门考核</span></li>
+                                    <li><input type="checkbox" class="check" value="4"> <span>考核组考核</span></li>
+                                    <li><input type="checkbox" class="check" value="5"> <span>责任分解录入</span></li>
+                                    <li><input type="checkbox" class="check" value="6"> <span>责任分解管理</span></li>
+                                </ul>
+                            </li>
+                            <li><button class="hide_btn">+</button> 数据查询
+                                <ul class="hide_authority">
+                                    <li><input type="checkbox" class="check" value="7"> <span>计划查询</span></li>
+                                    <li><input type="checkbox" class="check" value="8"> <span>责任分解查询</span></li>
+                                    <li><input type="checkbox" class="check" value="9"> <span>月统计报表</span></li>
+                                    <li><input type="checkbox" class="check" value="10"> <span>年统计报表</span></li>
+                                </ul>
+                            </li>
+                            <li><button class="hide_btn">+</button> 系统设置
+                                <ul class="hide_authority">
+                                    <li><input type="checkbox" class="check" value="11"> <span>人员信息</span></li>
+                                    <li><input type="checkbox" class="check" value="12"> <span>权限设置</span></li>
+                                    <li><input type="checkbox" class="check" value="13"> <span>共性目标</span></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="show_selected">
+                        <ul>
+                            <li>日常管理
+                                <ul>
+                                    <li class="hide_li">计划制定</li>
+                                    <li class="hide_li">自我评分</li>
+                                    <li class="hide_li">部门考核</li>
+                                    <li class="hide_li">考核组考核</li>
+                                    <li class="hide_li">责任分解录入</li>
+                                    <li class="hide_li">责任分解管理</li>
+                                </ul>
+                            </li>
+                            <li>数据查询
+                                <ul>
+                                    <li class="hide_li">计划查询</li>
+                                    <li class="hide_li">责任分解查询</li>
+                                    <li class="hide_li">月统计报表</li>
+                                    <li class="hide_li">年统计报表</li>
+                                </ul>
+                            </li>
+                            <li>系统设置
+                                <ul>
+                                    <li class="hide_li">人员信息</li>
+                                    <li class="hide_li">权限设置</li>
+                                    <li class="hide_li">共性目标</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../js/common/nav.js"></script>
+<script type="text/javascript" src="../../js/setup/authority.js"></script>
+</html>

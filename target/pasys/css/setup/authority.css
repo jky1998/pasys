@@ -1,0 +1,71 @@
+.authority {
+    flex: auto;
+    padding: 10px;
+}
+
+.authority_content {
+    width: calc(100vw - 220px);
+    height: 500px;
+    margin: 10px 0;
+}
+
+.select_role {
+    margin: 2px 5px;
+    padding: 2px 0;
+    width: calc(100vw - 230px);
+    height: 40px;
+}
+
+label {
+    text-align: right;
+    margin-top: 7px;
+    font-size: 15px;
+}
+
+.select_content {
+    display: flex;
+    width: calc(100vw - 230px);
+    height: 410px;
+    margin: 5px;
+}
+
+.select_authority
+, .show_selected {
+    width: 50%;
+    height: calc(100% - 10px);
+    margin: 5px;
+    border: 1px lightgray solid;
+    padding: 10px;
+}
+
+.hide_btn {
+    border: none;
+    background: white;
+    font-size: 18px;
+}
+
+.hide_btn:focus {
+    outline: 0;
+}
+
+.hide_authority {
+    display: none;
+}
+
+.hide_authority li {
+    padding-left: 15px;
+}
+
+.hide_authority li input {
+    margin: 0;
+    vertical-align: middle;
+}
+
+.hide_authority li span {
+    vertical-align: middle;
+}
+
+.hide_li {
+    padding-left: 20px;
+    display: none;
+}

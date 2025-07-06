@@ -1,0 +1,12 @@
+.common {
+    flex: auto;
+    padding: 10px;
+}
+
+.operations {
+    margin-top: 20px;
+}
+
+.common_goal_tbl {
+    margin-top: 20px;
+}

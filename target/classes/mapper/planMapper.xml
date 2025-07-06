@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ntu.jky.dao.PlanDao">
+    <resultMap id="planResultMap" type="ntu.jky.bean.Plan">
+        <id property="id" column="p_id"/>
+        <result property="monthly" column="p_monthly"/>
+        <result property="type" column="p_type"/>
+        <result property="score" column="p_score"/>
+        <result property="content" column="p_content"/>
+        <result property="detail" column="p_detail"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="planResultMap">
+        select p_id,
+          p_monthly,
+          p_type,
+          p_score,
+          p_content,
+          p_detail
+        from plan
+        <where>
+            <if test="type != null">
+                and p_type=#{type}
+            </if>
+            <if test="id != null">
+                and p_id=#{id}
+            </if>
+            <if test="monthly != null">
+                <![CDATA[
+                and DATE_FORMAT(p_monthly, '%Y-%m') =  DATE_FORMAT(#{monthly}, '%Y-%m')
+                ]]>
+            </if>
+        </where>
+    </select>
+
+    <insert id="add">
+        insert into plan(
+          p_monthly,
+          p_type,
+          p_score,
+          p_content,
+          p_detail,
+          p_plan_id
+        )
+        values (
+            #{monthly},
+            #{type},
+            #{score},
+            #{content},
+            #{detail},
+            #{affiliated.id}
+        )
+    </insert>
+
+    <update id="update">
+        update plan
+        <set>
+            <if test="monthly != null">
+                p_monthly=#{monthly},
+            </if>
+            <if test="type != null">
+                p_type= #{type},
+            </if>
+            <if test="score != null">
+                p_score=#{score},
+            </if>
+            <if test="content != null">
+                p_content=#{content},
+            </if>
+            <if test="detail != null">
+                p_detail=#{detail},
+            </if>
+            <if test="affiliated != null">
+                p_plan_id=#{affiliated.id}
+            </if>
+        </set>
+        where p_id=#{id}
+    </update>
+
+    <delete id="delete">
+        delete from plan where p_id in
+        <foreach collection="array" item="ids"  open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </delete>
+</mapper>

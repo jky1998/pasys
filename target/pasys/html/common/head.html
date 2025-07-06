@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div class="header"  th:fragment="NavHead">
+        <div class="user">
+            <span th:text="'当前操作员：' + ${staff.name}"></span>
+            <span id="date" class="date"></span>
+            <span id="day" class="day"></span>
+        </div>
+        <div class="title">
+            <span class="title_big">
+                <h1 style="display: inline-block">**市公路管理处</h1>
+            </span>
+            <span class="title_small">
+                <h3 style="display: inline-block">绩效考核管理系统</h3>
+            </span>
+        </div>
+        <div class="btns">
+            <a th:href="@{'/plan/index'}"><button class="butt" type="button">计划查询</button></a>
+            <a th:href="@{'/common/password'}"><button class="butt" type="button">修改密码</button></a>
+            <a th:href="@{'/common/login'}"><button class="butt" type="button">注销系统</button></a>
+            <a th:href="@{'/common/login'}"><button class="butt" type="button">退出系统</button></a>
+        </div>
+        <script type="text/javascript" src="../../js/common/head.js"
+                th:src="@{../../js/common/head.js}"></script>
+    </div>
+</body>
+</html>

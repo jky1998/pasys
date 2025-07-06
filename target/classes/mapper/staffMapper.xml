@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ntu.jky.dao.StaffDao">
+    <resultMap id="staffResultMap" type="ntu.jky.bean.Staff">
+        <id property="id" column="s_id"/>
+        <result property="no" column="s_no"/>
+        <result property="name" column="s_name"/>
+        <result property="gender" column="s_gender"/>
+        <result property="password" column="s_password"/>
+        <result property="workdate" column="s_workdate"/>
+        <result property="position" column="s_position"/>
+        <result property="mail" column="s_mail"/>
+        <result property="phone" column="s_phone"/>
+        <result property="idcard" column="s_idcard"/>
+        <result property="address" column="s_address"/>
+        <association property="department"
+                     resultMap="departmentResultMap"/>
+        <association property="role"
+                     resultMap="roleResultMap"/>
+    </resultMap>
+    <resultMap id="departmentResultMap" type="ntu.jky.bean.Department">
+        <id property="id" column="d_id"/>
+        <result property="no" column="d_no"/>
+        <result property="name" column="d_name"/>
+    </resultMap>
+    <resultMap id="roleResultMap" type="ntu.jky.bean.Role">
+        <id property="id" column="r_id"/>
+        <result property="name" column="r_name"/>
+        <result property="comment" column="r_comment"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="staffResultMap">
+        select s.s_id,
+          s.s_no,
+          s.s_name,
+          s.s_gender,
+          s.s_password,
+          s.s_workdate,
+          s.s_position,
+          s.s_mail,
+          s.s_phone,
+          s.s_idcard,
+          s.s_address,
+          d.d_id,
+          d.d_no,
+          d.d_name,
+          r.r_id,
+          r.r_name,
+          r.r_comment
+        from staff as s
+        left join department as d on s.s_department_id = d.d_id
+        left join role as r on s.s_role_id = r.r_id
+        <where>
+            <if test="id != null">
+                and s.s_id=#{id}
+            </if>
+            <if test="no != null and no != ''">
+                and s.s_no=#{no}
+            </if>
+            <if test="name !=null and name != ''">
+                and s.s_name=#{name}
+            </if>
+            <if test="department != null">
+                and d.d_id=#{department.id}
+            </if>
+        </where>
+    </select>
+
+    <insert id="add">
+        insert into staff(
+          s_no,
+          s_name,
+          s_gender,
+          s_password,
+          s_workdate,
+          s_position,
+          s_mail,
+          s_phone,
+          s_idcard,
+          s_address,
+          s_department_id
+        )
+        values (
+          #{no},
+          #{name},
+          #{gender},
+          #{password},
+          #{workdate},
+          #{position},
+          #{mail},
+          #{phone},
+          #{idcard},
+          #{address},
+          #{department.id}
+        )
+    </insert>
+
+    <update id="update">
+        update staff
+        <set>
+            <if test="no != null">
+                s_no=#{no},
+            </if>
+            <if test="name !=null">
+                s_name=#{name},
+            </if>
+            <if test="gender != null">
+                s_gender=#{gender},
+            </if>
+            <if test="password != null">
+                s_password=#{password},
+            </if>
+            <if test="workdate != null">
+                s_workdate=#{workdate},
+            </if>
+            <if test="position != null">
+                s_position=#{position},
+            </if>
+            <if test="mail != null">
+                s_mail=#{mail},
+            </if>
+            <if test="phone != null">
+                s_phone=#{phone},
+            </if>
+            <if test="idcard != null">
+                s_idcard=#{idcard},
+            </if>
+            <if test="address != null">
+                s_address=#{address},
+            </if>
+            <if test="department != null">
+                s_department_id=#{department.id},
+            </if>
+        </set>
+        where s_id=#{id}
+    </update>
+
+    <delete id="delete">
+        delete from staff where s_id in
+        <foreach item="ids" collection="array" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </delete>
+</mapper>

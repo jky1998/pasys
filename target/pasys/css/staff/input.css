@@ -1,0 +1,8 @@
+.staff {
+    flex: auto;
+    padding: 10px;
+}
+
+label {
+    padding-left: 15px;
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ntu.jky.dao.DepartmentDao">
+    <resultMap id="departmentResultMap" type="ntu.jky.bean.Department">
+        <id property="id" column="d_id"/>
+        <result property="no" column="d_no"/>
+        <result property="name" column="d_name"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="departmentResultMap">
+        select d_id, d_no, d_name
+        from department
+    </select>
+</mapper>

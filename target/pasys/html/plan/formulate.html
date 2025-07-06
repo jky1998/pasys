@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>pasys</title>
+    <link href="../../assets/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../assets/bootstrap-3.3.7-dist/css/bootstrap-datepicker.css" rel="stylesheet" media="screen"/>
+    <link href="../../css/common/common.css" rel="stylesheet">
+    <link href="../../css/plan/formulate.css" rel="stylesheet">
+    <script type="text/javascript" src="../../assets/jquery/jquery-2.2.4.min.js"
+            th:src="@{../../assets/jquery/jquery-2.2.4.min.js}"></script>
+    <script type="text/javascript" src="../../assets/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div th:include="/common/head::NavHead" id="head" class="header"></div>
+    <div class="content">
+        <div th:include="/common/nav::Nav" id="nav"></div>
+        <div class="formulate">
+            <div class="form_title">
+                <span>计划制定</span>
+            </div>
+            <form class="form-horizontal plan_form">
+                <div class="form-inline">
+                    <div>
+                        <label class="control-label" style="margin-left: 10px">选择月度：</label>
+                        <select class="form-control" id="yyyy"
+                                style="width: 80px"></select>
+                        <span>年</span>
+                        <select class="form-control" id="mm"
+                                style="width: 80px"></select>
+                        <span>月</span>
+                        <input id="copyLastPlan" type="button" value="复制上月计划" class="btn form_btn" style="margin-left: 10px;">
+                        <input type="button" value="添加计划明细" class="btn form_btn" data-toggle="modal" data-target="#add">
+                        <input id="copy" type="button" value="复制共性目标" class="btn form_btn">
+                        <input id="getUpdatePlan" type="button" value="修改" class="btn form_btn" data-target="#update">
+                        <input id="delete" type="button" value="删除" class="btn form_btn">
+                    </div>
+                </div>
+            </form>
+            <table class="table table-striped table-bordered plan_tbl" id="plan_tbl">
+                <tr>
+                    <th style="width: 5%"><input type="checkbox" id="selectAll" value="0"></th>
+                    <th>月度</th>
+                    <th style="width: 70%">目标内容</th>
+                    <th>详细信息</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <!-- 模态框（Modal） -->
+    <!--添加计划明细-->
+    <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title">
+                        添加计划明细
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal" style="color: #5e5e5e">
+                        <div class="form-group" style="display: none;">
+                            <label for="updateId" class="col-sm-2 control-label">编号</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="updateId" name="updateId">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="addContent" class="col-sm-2 control-label">目标内容</label>
+                            <div class="col-sm-8">
+                                <textarea rows="5" class="form-control" id="addContent" name="addContent"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="addDetail" class="col-sm-2 control-label">详细信息</label>
+                            <div class="col-sm-8">
+                                <textarea rows="5" class="form-control" id="addDetail" name="addDetail"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="addScore" class="col-sm-2 control-label">分值</label>
+                            <div class="col-sm-8">
+                                <input type="text" rows="5" class="form-control" id="addScore" name="addScore">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="submit_add">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--修改计划明细-->
+    <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title">
+                        修改计划明细
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal" style="color: #5e5e5e">
+                        <div class="form-group">
+                            <label for="updateContent" class="col-sm-2 control-label">目标内容</label>
+                            <div class="col-sm-8">
+                                <textarea rows="5" class="form-control" id="updateContent" name="updateContent"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="addDetail" class="col-sm-2 control-label">详细信息</label>
+                            <div class="col-sm-8">
+                                <textarea rows="5" class="form-control" id="updateDetail" name="addDetail"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="updateScore" class="col-sm-2 control-label">分值</label>
+                            <div class="col-sm-8">
+                                <input type="text" rows="5" class="form-control" id="updateScore" name="updateScore">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="submit_update">提交更改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--详细信息-->
+    <div class="modal fade" id="details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title">
+                        详细信息
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <p id="detail"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary"
+                            data-dismiss="modal">关闭
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../js/common/nav.js"></script>
+<script type="text/javascript" src="../../js/plan/formulate.js"></script>
+<script type="text/javascript" src="../../js/plan/common.js"></script>
+</html>

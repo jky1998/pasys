@@ -1,0 +1,19 @@
+/* 页面初始化 */
+* {margin: 0; padding: 0;}
+a {text-decoration: none;}
+ul {list-style: none;}
+
+.manage {
+    flex: auto;
+    padding: 10px;
+}
+
+.staff_form {
+    margin-top: 20px;
+}
+
+.staff_tbl {
+    margin-top: 20px;
+}
+
+

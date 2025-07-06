@@ -1,0 +1,26 @@
+.assessment_department {
+    flex: auto;
+    padding: 10px;
+}
+
+.department_form {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.department_content {
+    display: flex;
+}
+
+.staff_content {
+     width: 20%;
+     margin: 5px 0 5px 5px;
+     border-right: 2px lightgray solid;
+     padding: 10px;
+ }
+
+.score_content {
+    width: 80%;
+    margin: 5px 5px 5px 0;
+    padding: 10px;
+}

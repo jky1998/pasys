@@ -1,0 +1,170 @@
+/* 页面初始化 */
+* {margin: 0; padding: 0;}
+a {text-decoration: none;}
+ul {list-style: none;}
+h1 {margin: 0;}
+h3 {margin: 0;}
+
+/*标题*/
+.header {
+    width: 100%;
+    background: #5e5e5e;
+}
+
+.user {
+    color: white;
+    font-family: 黑体;
+    font-size: small;
+    text-align: center;
+}
+
+.date {
+    margin-left: 20px;
+}
+
+.title {
+    color: white;
+    margin-left: 15px;
+}
+
+.title_big {
+    font-family: 楷体;
+    text-shadow: 0.1em 0.1em 0.5em #0f0f0f;
+}
+
+.title_small {
+    font-family: 楷体;
+}
+
+.day {
+    font-family: 黑体;
+    font-size: small;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.btns {
+    margin-top: 20px;
+    margin-left: 270px;
+}
+
+.butt {
+    outline: none;
+    background: #5e5e5e;
+    height: 30px;
+    width: 85px;
+    font-family: 楷体;
+    font-size: medium;
+    color: white;
+    margin-right: 15px;
+    border: 1px solid gray;
+    border-bottom: none;
+    box-shadow: 0 0 5px white;
+}
+
+/*导航*/
+#nav {
+    width: 200px;
+    flex: none;
+    border-right: 2px #5e5e5e solid;
+}
+
+.nav_title {
+    color: #5e5e5e;
+    font-family: 黑体;
+    font-weight: bold;
+    padding-top: 10px;
+}
+
+.title_main {
+    padding-left: 25px;
+    font-size: large;
+}
+
+.hide_title {
+    display: none;
+}
+
+.hide_title li {
+    line-height: 30px;
+    padding-left: 40px;
+}
+
+.second_title li {
+    padding-left: 60px;
+}
+
+.hide_title a {
+    color: #5e5e5e;
+    font-family: 黑体;
+    font-weight: bold;
+    line-height: 30px;
+}
+
+.hide_title a:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.hide_title>a>li:hover {
+    background: #5e5e5e;
+}
+
+/*页面*/
+.content {
+    display: flex;
+    width: 100vw;
+    height: calc(100% - 107px);
+    min-height: calc(100vh - 107px);
+    color: #5e5e5e;
+}
+
+.form_title {
+    color: #5e5e5e;
+    font-size: medium;
+    font-family: 幼圆;
+    font-weight: bold;
+    color: white;
+    background: #5e5e5e;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 30px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.form_btn {
+    background: #5e5e5e;
+    color: white;
+}
+
+.form_btn:hover {
+    color: white;
+}
+
+.form_btn:active {
+    color: white;
+}
+
+.form_btn:focus {
+    color: white;
+    outline: 0;
+}
+
+/*分页*/
+.page{
+    margin: auto;
+    width: 300px;
+    text-align: center;
+    margin-top: 10px;
+}
+.page_cell{
+    float: left;
+    width: 50px;
+    border:1px solid #F5F5F5;
+    margin:2px;
+    cursor: pointer;
+}
+.page_cell:hover {
+    -webkit-box-shadow: #777 0px 0px 1px;
+}

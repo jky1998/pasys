@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ntu.jky.dao.ScoreDao">
+    <resultMap id="scoreResultMap" type="ntu.jky.bean.Score">
+        <id property="id" column="sc_id"/>
+        <result property="monthly" column="sc_monthly"/>
+        <result property="score" column="sc_score"/>
+        <result property="type" column="sc_type"/>
+        <association property="assessor" resultMap="assessorResultMap"/>
+        <association property="staff" resultMap="staffResultMap"/>
+    </resultMap>
+    <resultMap id="assessorResultMap" type="ntu.jky.bean.Staff">
+        <id property="id" column="s1_id"/>
+        <result property="no" column="s1_no"/>
+        <result property="name" column="s1_name"/>
+    </resultMap>
+    <resultMap id="staffResultMap" type="ntu.jky.bean.Staff">
+        <id property="id" column="s2_id"/>
+        <result property="no" column="s2_no"/>
+        <result property="name" column="s2_name"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="scoreResultMap">
+        select sc.sc_id,
+          sc.sc_monthly,
+          sc.sc_score,
+          sc.sc_type,
+          s1.s_id as s1_id,
+          s1.s_no as s1_no,
+          s1.s_name as s1_name,
+          s2.s_id as s2_id,
+          s2.s_no as s2_no,
+          s2.s_name as s2_name
+        from score as sc
+        left join staff as s1 on s1.s_id=sc.sc_staff_assessor
+        left join staff as s2 on s2.s_id=sc.sc_staff_id
+        <where>
+            <if test="id != null">
+                and sc.sc_id=#{id}
+            </if>
+            <if test="staff != null">
+                and s2.s_id=#{staff.id}
+            </if>
+            <if test="monthly != null">
+                <![CDATA[
+                and DATE_FORMAT(sc_monthly, '%Y-%m') =  DATE_FORMAT(#{monthly}, '%Y-%m')
+                ]]>
+            </if>
+            <if test="type != null">
+                and sc.sc_type=#{type}
+            </if>
+            <if test="assessor != null">
+                and s1.s_id=#{assessor.id}
+            </if>
+        </where>
+    </select>
+
+    <insert id="add">
+        insert into score(
+          sc_monthly,
+          sc_score,
+          sc_type,
+          sc_staff_assessor,
+          sc_staff_id
+        )
+        values (
+          #{monthly},
+          #{score},
+          #{type},
+          #{assessor.id},
+          #{staff.id}
+        )
+    </insert>
+
+    <update id="update">
+        update score
+        <set>
+            <if test="score != null">
+                sc_score=#{score}
+            </if>
+        </set>
+        where sc_id=#{id}
+    </update>
+</mapper>

@@ -1,0 +1,9 @@
+.decompose_input {
+    flex: auto;
+    padding: 10px;
+}
+
+.selector {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
