@@ -61,6 +61,8 @@
                 p_monthly=#{monthly},
             </if>
             <if test="type != null">
+
+
                 p_type= #{type},
             </if>
             <if test="score != null">
